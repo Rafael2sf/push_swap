@@ -1,0 +1,11 @@
+[1] ( Problably very slow )
+
+pb
+while (a != NULL)
+if (peek(a) > peek(b))
+	pb
+else
+	pa
+	sa
+while (b)
+	pb
