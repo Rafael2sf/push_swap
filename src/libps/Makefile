@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 16:11:32 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/07 00:31:19 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/08 11:50:54 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME	=		libps.a
 
 # Terminal commands
 RM		=		rm -f
+PRNT	=		printf
 
 # Colors
 C_GRN	=		\033[32m
@@ -40,17 +41,24 @@ LIBS	=		$(LIB_D)/libft.a
 all: $(NAME)
 
 $(OBJ_D)/%.o: $(SRC_D)%.c
-	@ echo -n "▰"
+	@ $(PRNT) "▰"
 	@ $(CC) $(CFLAGS) -o $@ -c $<
 
-$(NAME): deps
-	@ echo -n "├—● libps\n│$(C_GRN)"
+$(NAME): deps $(OBJ_D) $(LIB_D)
+	@ $(PRNT) "├—● libps\n│$(C_GRN)"
 	@ $(MAKE) -s $(OBJS)
+	@ cp $(LIBS) $(LIB_D)/$(NAME)
 	@ $(AR) $(LIB_D)/$@ $(OBJS)
-	@ echo -n "$(C_DEF)\n"
+	@ $(PRNT) "$(C_DEF)\n"
 
 deps:
 	@$(MAKE) libft.a -C ../libft
+
+$(OBJ_D):
+	@ mkdir $(OBJ_D)
+
+$(LIB_D):
+	@ mkdir $(LIB_D)
 
 clean:
 	@ $(RM) $(OBJS)
@@ -60,4 +68,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all deps clean fclean re

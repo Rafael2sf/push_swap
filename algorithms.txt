@@ -1,11 +1,15 @@
-[1] ( Problably very slow )
+ruby -e "puts (1..100).to_a.shuffle.join(' ')")
+
+[1] ( Omega slow )
 
 pb
 while (a != NULL)
-if (peek(a) > peek(b))
+if (peek(a) > peek(b) || No b)
 	pb
 else
 	pa
 	sa
 while (b)
 	pb
+
+[2]

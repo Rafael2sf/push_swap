@@ -6,15 +6,16 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 11:34:36 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/07 00:31:03 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/08 11:45:41 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Project name
 NAME	=		libft.a
 
-# Terminal commands
+# Commands
 RM		=		rm -f
+PRNT	=		printf
 
 # Colors
 C_GRN	=		\033[32m
@@ -39,14 +40,20 @@ OBJS	=		$(patsubst $(SRC_D)%.c,$(OBJ_D)/%.o,$(SRCS))
 all: $(NAME)
 
 $(OBJ_D)/%.o: $(SRC_D)%.c
-	@ echo -n "▰"
+	@ $(PRNT) "▰"
 	@ $(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME):
-	@ echo -n "├—● libft\n│$(C_GRN)"
+$(NAME): $(OBJ_D) $(LIB_D)
+	@ $(PRNT) "├—● libft\n│$(C_GRN)"
 	@ $(MAKE) -s $(OBJS)
 	@ $(AR) $(LIB_D)/$@ $(OBJS)
-	@ echo -n "$(C_DEF)\n"
+	@ $(PRNT) "$(C_DEF)\n"
+
+$(OBJ_D):
+	@ mkdir $(OBJ_D)
+
+$(LIB_D):
+	@ mkdir $(LIB_D)
 
 clean:
 	@ $(RM) $(OBJS)

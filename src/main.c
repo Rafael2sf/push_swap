@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/07 22:52:55 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:26:30 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,38 +47,36 @@ static void	app(t_list **a)
 	while (1)
 	{
 		inpt = get_next_line(0);
-		if (ft_strncmp("w", inpt, 1) == 0)
-			ps_prints(*a, b);
-		else if (ft_strncmp("sa", inpt, 2) == 0)
-			ps_swap(a, 'a');
+		if (ft_strncmp("sa", inpt, 2) == 0)
+			ps_swap(a, '\0');
 		else if (ft_strncmp("sb", inpt, 2) == 0)
-			ps_swap(&b, 'b');
+			ps_swap(&b, '\0');
 		else if (ft_strncmp("ss", inpt, 2) == 0)
 		{
-			ps_swap(a, 'a');
-			ps_swap(&b, 'b');
+			ps_swap(a, '\0');
+			ps_swap(&b, '\0');
 		}
 		else if (ft_strncmp("rra", inpt, 3) == 0)
-			ps_rrot(a, 'a');
+			ps_rrot(a, '\0');
 		else if (ft_strncmp("rrb", inpt, 3) == 0)
-			ps_rrot(&b, 'b');
+			ps_rrot(&b, '\0');
 		else if (ft_strncmp("rrr", inpt, 3) == 0)
 		{
-			ps_rrot(a, 'a');
-			ps_rrot(&b, 'b');
+			ps_rrot(a, '\0');
+			ps_rrot(&b, '\0');
 		}
 		else if (ft_strncmp("pa", inpt, 2) == 0)
-			ps_push(a, &b, 'a');
+			ps_push(a, &b, '\0');
 		else if (ft_strncmp("pb", inpt, 2) == 0)
-			ps_push(&b, a, 'b');
+			ps_push(&b, a, '\0');
 		else if (ft_strncmp("ra", inpt, 2) == 0)
-			ps_rot(a, 'a');
+			ps_rot(a, '\0');
 		else if (ft_strncmp("rb", inpt, 2) == 0)
-			ps_rot(&b, 'b');
+			ps_rot(&b, '\0');
 		else if (ft_strncmp("rr", inpt, 2) == 0)
 		{
-			ps_rot(a, 'a');
-			ps_rot(&b, 'b');
+			ps_rot(a, '\0');
+			ps_rot(&b, '\0');
 		}
 		else if (ft_strncmp("q", inpt, 1) == 0)
 		{
@@ -89,14 +87,15 @@ static void	app(t_list **a)
 		if (inpt)
 			free(inpt);
 		inpt = NULL;
+		ps_prints(*a, b);
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	(void)(app);
 	t_list	*stack;
 	t_list	*helper;
+	(void)(app);
 
 	helper = NULL;
 	if (argc <= 1)
@@ -106,7 +105,11 @@ int	main(int argc, char **argv)
 		return (-1);
 	//app(&stack);
 	ps_alg1(&stack, &helper);
-	ft_lstiter(stack, ps_show);
+	if (ps_issorted(stack) == 0)
+		ft_putstr(1, "\033[32mOK\033[39m\n");
+	else
+		ft_putstr(1, "\033[31mKO\033[39m\n");
+	ft_lstiter(stack, putlongv);
 	ft_lstclear(&stack, NULL);
 	return (0);
 }

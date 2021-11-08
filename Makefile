@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/07 00:30:29 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/08 11:59:51 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME	=		push_swap
 
 # Terminal commands
 RM		=		rm -f
+PRNT	=		printf
 
 # Colors
 C_GRN	=		\033[32m
@@ -27,7 +28,7 @@ OBJ_D	=		./obj
 LIB_D	=		./libs
 BIN_D	=		./bin
 
-# Compiling commands
+# Commands
 CC		=		gcc
 AR		=		ar rcs
 CFLAGS	=		-g -Wall -Werror -Wextra
@@ -35,31 +36,35 @@ CFLAGS	=		-g -Wall -Werror -Wextra
 # Files
 SRCS	=		$(SRC_D)/main.c
 OBJS	=		$(patsubst $(SRC_D)%.c,$(OBJ_D)/%.o,$(SRCS))
+LIBS	=		$(LIB_D)/libps.a
 
 # Rules
 all: $(NAME)
 
 $(OBJ_D)/%.o: $(SRC_D)%.c
-	@ echo -n "▰"
+	@ $(PRNT) "▰"
 	@ $(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME):
-	@ echo -n "\n●\n│\n"
+$(NAME): $(BIN_D)
+	@ $(PRNT) "\n●\n│\n"
 	@ $(MAKE) -s deps
-	@ echo -n "├—● main\n│$(C_GRN)"
+	@ $(PRNT) "├—● main\n│$(C_GRN)"
 	@ $(MAKE) -s $(OBJS)
-	@ $(CC) $(CFLAGS) -o $(BIN_D)/$(NAME) $(OBJ_D)/*.o
-	@ echo -n "$(C_DEF)\n"
-	@ echo "● $(NAME)\n"
+	@ $(CC) $(CFLAGS) -o $(BIN_D)/$(NAME) -L. $(LIBS) $(SRCS)
+	@ $(PRNT) "$(C_DEF)\n"
+	@ $(PRNT) "● $(NAME)\n"
 
 deps:
 	@ $(MAKE) libps.a -C ./src/libps
+
+$(BIN_D):
+	mkdir $(BIN_D)
 
 clean:
 	@ $(RM) $(OBJ_D)/*.o $(LIB_D)/*.a 
 
 fclean: clean
-	@ $(RM) $(BIN_D)/$(NAME)
+	@ $(RM) -rf $(OBJ_D) $(LIB_D) $(BIN_D)
 
 re: fclean all
 

@@ -6,13 +6,13 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:02:07 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/07 22:47:21 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/08 12:37:59 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libps.h"
 
-void	ps_show(void *x)
+void	putlongv(void *x)
 {
 	ft_printf("%d ", (long)(x));
 }

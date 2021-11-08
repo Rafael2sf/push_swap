@@ -16,7 +16,8 @@ void	ps_rrot(t_list **s, char ab)
 {
 	t_list	*tmp;
 	
-	ft_printf("rr%c\n", ab);
+	if (ab)
+		ft_printf("rr%c\n", ab);
 	if (!s || !*s || !((*s)->next))
 		return ;
 	tmp = (*s);
