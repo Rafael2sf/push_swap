@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/09 15:31:00 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/09 15:56:38 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ deps:
 	@ $(MAKE) libps.a -C ./src/libps
 
 $(BIN_D):
-	mkdir $(BIN_D)
+	@ mkdir $(BIN_D)
 
 clean:
 	@ $(RM) $(OBJ_D)/*.o $(LIB_D)/*.a 

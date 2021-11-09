@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/09 15:47:44 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/09 17:30:53 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		ft_putendl(1, "Error");
 		return (2);
 	}
-	//app(&stack);
+	//app(&a);
 	ps_main(&a, &b, argc - 1);
 	if (ps_issorted(a) == 0)
 		ft_putstr(1, "\033[32mOK\033[39m\n");
