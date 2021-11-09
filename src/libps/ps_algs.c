@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 22:10:26 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/08 14:32:54 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/09 12:23:15 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	show_stacks(t_list *a, t_list *b)
 {
-	ft_lstiter(a, putlongv);
+	ft_lstiter(a, ps_putvl);
 	ft_putchar(1, '\n');
-	ft_lstiter(b, putlongv);
+	ft_lstiter(b, ps_putvl);
 	ft_putstr(1, "\n");
 }
 
@@ -27,22 +27,18 @@ void	ps_alg1(t_list **a, t_list **b)
 
 	while ((*a) != NULL)
 	{
-		if (!*b || ((*a)->content) > ((*b)->content))
+		if (!*b || ((int)(*a)->content) > ((int)(*b)->content))
 		{
 			n = ps_issorted(*a);
 			if (n == 0)
 				break ;
 			while (n--)
-			{
 				ps_push(b, a, 'b');
-				//show_stacks(*a, *b);
-			}
 		}
 		else
 		{
 			ps_push(a, b, 'a');
 			ps_swap(a, 'a');
-			//show_stacks(*a, *b);
 		}
 	}
 	while (*b)

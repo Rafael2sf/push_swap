@@ -1,4 +1,4 @@
-ruby -e "puts (1..100).to_a.shuffle.join(' ')")
+ruby -e "puts (1..100).to_a.shuffle.join(' ')"
 
 [1] ( Omega slow )
 

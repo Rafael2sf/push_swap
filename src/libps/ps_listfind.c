@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_rrot.c                                        :+:      :+:    :+:   */
+/*   ps_listfind.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 21:24:23 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/07 21:32:20 by rafernan         ###   ########.fr       */
+/*   Created: 2021/11/09 14:41:42 by rafernan          #+#    #+#             */
+/*   Updated: 2021/11/09 14:57:33 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 
-void	ps_rrot(t_list **s, char ab)
+int	ps_lstfind(t_list *s, int nbr)
 {
 	t_list	*tmp;
 
-	if (ab)
-		ft_printf("rr%c\n", ab);
-	if (!s || !*s || !((*s)->next))
-		return ;
-	tmp = (*s);
-	while (tmp->next->next)
+	tmp = s;
+	while (tmp)
+	{
+		if ((long)(tmp->content) == nbr)
+			return (1);
 		tmp = (tmp->next);
-	(tmp->next->next) = (*s);
-	(*s) = (tmp->next);
-	(tmp->next) = NULL;
+	}
+	return (0);
 }

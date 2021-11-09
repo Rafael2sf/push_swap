@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/08 11:59:51 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/09 15:31:00 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ BIN_D	=		./bin
 # Commands
 CC		=		gcc
 AR		=		ar rcs
-CFLAGS	=		-g -Wall -Werror -Wextra
+CFLAGS	=		-g -Wall -Werror -Wextra -fsanitize=address
 
 # Files
 SRCS	=		$(SRC_D)/main.c

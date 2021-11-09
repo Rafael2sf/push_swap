@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_exit.c                                          :+:      :+:    :+:   */
+/*   ps_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 23:56:58 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/08 13:01:12 by rafernan         ###   ########.fr       */
+/*   Created: 2021/11/09 15:43:30 by rafernan          #+#    #+#             */
+/*   Updated: 2021/11/09 15:51:13 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libps.h"
+#include "libps.h"
 
-void	ps_exit(t_list	**stack, int ret)
+int	ps_main(t_list **a, t_list **b, int len)
 {
-	ft_lstclear(stack, NULL);
-	ft_putendl(2, "Error");
-	exit(ret);
+	(void)(len);
+	ps_alg1(a, b);
+	return (1);
 }

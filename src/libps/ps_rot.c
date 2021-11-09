@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:17:03 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/08 14:28:05 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/09 15:50:23 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ps_rot(t_list **s, char ab)
 {
 	t_list	*ptr;
 	t_list	*tmp;
-	
+
 	if (ab)
 		ft_printf("r%c\n", ab);
 	if (!s || !*s || !((*s)->next))
