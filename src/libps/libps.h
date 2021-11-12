@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 20:21:13 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/09 15:51:07 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/11 15:38:40 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ps_putvl(void *x);
 
 t_list	*ps_lstatoi(char **list, int size);
 int		ps_lstfind(t_list *s, int nbr);
+int		ps_lstavg(t_list *a);
+
 int		ps_atoi(const char *str, int *nbr);
 
 void	ps_swap(t_list **s, char ab);

@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 22:10:26 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/09 12:23:15 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/11 16:07:54 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,20 @@ void	ps_alg1(t_list **a, t_list **b)
 		ps_push(a, b, 'a');
 }
 
-void	ps_alg2(t_list **a, t_list **b)
+int		ps_lstavg(t_list *a)
 {
-	(void)(a);
-	(void)(b);
-	return ;
+	long	avg;
+	float	i;
+	t_list	*tmp;
+
+	i = 0;
+	tmp = a;
+	avg = 0;
+	while (tmp)
+	{
+		avg += (long)(tmp->content);
+		i += 1;
+		tmp = (tmp->next);
+	}
+	return (avg / i);
 }
