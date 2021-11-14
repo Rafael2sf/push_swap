@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 11:34:36 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/08 11:45:41 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/13 12:52:43 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME	=		libft.a
 
 # Commands
 RM		=		rm -f
+MD		=		mkdir
 PRNT	=		printf
 
 # Colors
@@ -40,26 +41,23 @@ OBJS	=		$(patsubst $(SRC_D)%.c,$(OBJ_D)/%.o,$(SRCS))
 all: $(NAME)
 
 $(OBJ_D)/%.o: $(SRC_D)%.c
-	@ $(PRNT) "▰"
-	@ $(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ_D) $(LIB_D)
-	@ $(PRNT) "├—● libft\n│$(C_GRN)"
-	@ $(MAKE) -s $(OBJS)
-	@ $(AR) $(LIB_D)/$@ $(OBJS)
-	@ $(PRNT) "$(C_DEF)\n"
+	$(MAKE) $(OBJS)
+	$(AR) $(LIB_D)/$@ $(OBJS)
 
 $(OBJ_D):
-	@ mkdir $(OBJ_D)
+	$(MD) $(OBJ_D)
 
 $(LIB_D):
-	@ mkdir $(LIB_D)
+	$(MD) $(LIB_D)
 
 clean:
-	@ $(RM) $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	@ $(RM) $(LIB_D)/$(NAME)
+	$(RM) $(LIB_D)/$(NAME)
 
 re: fclean all
 

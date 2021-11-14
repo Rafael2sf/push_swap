@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_main.c                                          :+:      :+:    :+:   */
+/*   ps_lstavg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 15:43:30 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/11 15:19:07 by rafernan         ###   ########.fr       */
+/*   Created: 2021/11/13 13:51:59 by rafernan          #+#    #+#             */
+/*   Updated: 2021/11/13 15:01:03 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 
-int	ps_main(t_list **a, t_list **b, int len)
+int	ps_lstavg(t_list *s, size_t	len)
 {
-	(void)(len);
-	ps_alg1(a, b);
-	return (1);
+	t_list	*tmp;
+	double	n;
+	double	d;
+
+	if (!s)
+		return (0);
+	tmp = (s->next);
+	n = (int)(long)(s->content);
+	d = 1;
+	while (tmp && len)
+	{
+		n = (d * n) + (int)(long)(tmp->content);
+		n /= ++d;
+		tmp = (tmp->next);
+		len--;
+	}
+	return ((int)n);
 }

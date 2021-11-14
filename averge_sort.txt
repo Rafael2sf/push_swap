@@ -1,0 +1,55 @@
+ruby -e "puts (1..100).to_a.shuffle.join(' ')"
+
+Average sort
+(Missing implementation of ss rr and rrr)
+
+\/
+
+if (a <= avg)
+{
+	if (a > last)
+		rra
+	if (a > a->next)
+		sa
+	pb
+}
+else if (a->next <= avg)
+	sa
+else if (a->last <= avg)
+	rra
+else
+	ra
+
+then
+
+loop <->
+if (b < b->last || b < avg)
+	rb
+eif (b < b->next)
+	sb
+else
+	break ;
+loop <->
+
+/\
+
+2nd part
+A has 2 elems --
+
+loop <-> while (half isnt sorted)
+
+if (b > a)
+	pb
+	sb
+	pa
+if (b->last > b)
+	rrb
+	pa
+if (b < bvg)
+	rb
+if (b < b->next)
+	sb
+if (b < a)
+	pa
+
+loop <-> Repeat 1st part but reversed on b while b && a isnt sorted

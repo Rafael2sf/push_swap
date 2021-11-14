@@ -1,0 +1,111 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_sortr.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/13 13:27:17 by rafernan          #+#    #+#             */
+/*   Updated: 2021/11/13 16:31:23 by rafernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#define SRT_DIV 10
+
+#include "libps.h"
+
+/* Resort B stack */
+void	sortr3(t_list **a, t_list **b, int count)
+{
+	int	avg;
+	int size;
+
+	size = count;
+	avg = ps_lstavg(*b, size);
+	while (((long)ft_lstlast(*b)->content) > avg)
+		ps_rrot(b, 'b');
+	while (ps_lstf_bigger(*b, avg, size))
+	{
+		if ((long)((*b)->content) > avg)
+		{
+			ps_push(a, b, 'a');
+			size--;
+		}
+		else
+			ps_rot(b, 'b');
+	}
+}
+
+/* Slow sort len digits */
+void	sortr2(t_list **a, t_list **b, int len)
+{
+	long bvg;
+
+	bvg = ps_lstavg(*b, len);
+	while (((long)(*b)->content) > bvg)
+	{
+		if ((long)((*b)->content) < (long)((*a)->content))
+		{
+			ps_push(a, b, 'a');
+			len--;
+		}
+		else
+		{
+			ps_push(b, a, 'b');
+			ps_swap(b, 'b');
+		}
+		bvg = ps_lstavg(*b, len);
+	}
+}
+
+/* Get list size and number of digits to sort */
+void	sortr1(t_list **a, t_list **b)
+{
+	int count;
+	int	len;
+
+	while (ft_lstsize(*b) != 2)
+	{
+		len = (ft_lstsize(*b));
+		if (len <= SRT_DIV * 2)
+			return ;
+		count = len / SRT_DIV;
+		sortr2(a, b, count);
+		sortr3(a, b, count);
+	}
+}
+
+/* Push all stack A to B, except last 2, and sort with average as you go */
+void	sortr(t_list **a, t_list **b, int alen, int blen)
+{
+	int	avg;
+	int bvg;
+
+	if (alen <= 2)
+	{
+		if (alen == 2 && (long)((*a)->content) > (long)((*a)->next->content))
+			ps_swap(a, 'a');
+		return (sortr1(a, b));
+	}
+	avg = ps_lstavg(*a, alen);
+	bvg = ps_lstavg(*b, blen);
+	(void)(bvg);
+	if ((long)((*a)->content) < avg)
+	{
+		ps_push(b, a, 'b');
+		if ((long)((*b)->content) < bvg)
+			ps_rot(b, 'b');
+		sortr(a, b, alen - 1, blen + 1);
+	}
+	else if ((long)(ft_lstlast(*a)->content) < avg)
+	{
+		ps_rrot(a, 'a');
+		ps_push(b, a, 'b');
+		sortr(a, b, alen - 1, blen + 1);
+	}
+	else
+	{
+		ps_rot(a, 'a');
+		sortr(a, b, alen, blen);	
+	}
+}

@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/11 15:35:23 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/13 13:08:49 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,15 @@ C_DEF	=		\033[39m
 C_RED	=		\033[31m
 
 # Directories
-SRC_D	=		./src
-OBJ_D	=		./obj
-LIB_D	=		./libs
-BIN_D	=		./bin
+SRC_D	=		src
+OBJ_D	=		obj
+LIB_D	=		libs
+BIN_D	=		bin
 
 # Commands
 CC		=		gcc
 AR		=		ar rcs
-CFLAGS	=		-g -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	=		-g -Wall -Werror -Wextra
 
 # Files
 SRCS	=		$(SRC_D)/main.c
@@ -42,29 +42,24 @@ LIBS	=		$(LIB_D)/libps.a
 all: $(NAME)
 
 $(OBJ_D)/%.o: $(SRC_D)%.c
-	@ $(PRNT) "▰"
-	@ $(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(BIN_D)
-	@ $(PRNT) "\n●\n│\n"
-	@ $(MAKE) -s deps
-	@ $(PRNT) "├—● main\n│$(C_GRN)"
-	@ $(MAKE) -s $(OBJS)
-	@ $(CC) $(CFLAGS) -o $(BIN_D)/$(NAME) -L. $(LIBS) $(SRCS)
-	@ $(PRNT) "$(C_DEF)\n"
-	@ $(PRNT) "● $(NAME)\n"
+	$(MAKE) deps
+	$(MAKE) $(OBJS)
+	$(CC) $(CFLAGS) -o $(BIN_D)/$(NAME) $(SRCS) $(LIBS)
 
 deps:
-	@ $(MAKE) libps.a -C ./src/libps
+	$(MAKE) libps.a -C ./src/libps
 
 $(BIN_D):
-	@ mkdir $(BIN_D)
+	mkdir $(BIN_D)
 
 clean:
-	@ $(RM) $(OBJ_D)/*.o $(LIB_D)/*.a 
+	$(RM) $(OBJ_D)/*.o $(LIB_D)/*.a 
 
 fclean: clean
-	@ $(RM) -rf $(OBJ_D) $(LIB_D) $(BIN_D)
+	$(RM) -rf $(OBJ_D) $(LIB_D) $(BIN_D)
 
 re: fclean all
 
