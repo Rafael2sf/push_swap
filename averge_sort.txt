@@ -53,3 +53,29 @@ if (b < a)
 	pa
 
 loop <-> Repeat 1st part but reversed on b while b && a isnt sorted
+
+calc average of nth, all bigger go a, less go rb, then again on a, all smaller go ra
+
+
+
+---------------
+
+
+while a < avg
+ pb rb
+	-> recalc avg
+while
+	blast > avg	
+ 		rrb
+ --- (b)
+	is less then avg go rb;
+	eif
+	bnext is bigger swapb
+ --- (a)
+	eif a < b
+		ra
+	else
+		pa
+
+
+12

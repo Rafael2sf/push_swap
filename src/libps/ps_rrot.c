@@ -26,4 +26,12 @@ void	ps_rrot(t_list **s, char ab)
 	(tmp->next->next) = (*s);
 	(*s) = (tmp->next);
 	(tmp->next) = NULL;
+	/*		
+	if (ab == 'b')
+		ps_prints(NULL, *s);
+	else
+		ps_prints(*s, NULL);
+	ps_prints(*s, NULL);
+	usleep(12300);
+*/
 }

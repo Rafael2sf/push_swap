@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 20:21:13 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/13 18:15:28 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/15 12:07:53 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int		ps_issorted(t_list	*a);
 void	ps_sort(t_list **a, t_list **b, int alen, int blen);
 
 void	app(t_list **a, t_list **b);
+void	ps_prints(t_list *a, t_list *b);
 
 #endif

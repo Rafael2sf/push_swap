@@ -6,20 +6,23 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 13:46:26 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/13 16:50:18 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/15 12:13:50 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 
-static void	ps_prints(t_list *a, t_list *b)
+void	ps_prints(t_list *a, t_list *b)
 {
 	t_list	*ptr_a;
 	t_list	*ptr_b;
 
 	ptr_a = a;
 	ptr_b = b;
-	ft_printf("Avg: (%d), dvg: (%d) \nA:\t", ps_lstavg(a, ft_lstsize(a)), ps_lstavg(b, ft_lstsize(b)));
+
+	ft_putstr(1, "A: \t");
+	if (!ptr_a)
+		ft_putstr(1, " ... ");
 	while (ptr_a)
 	{
 		ft_putnbr(1, (long)(ptr_a->content));
@@ -27,6 +30,8 @@ static void	ps_prints(t_list *a, t_list *b)
 		ptr_a = (ptr_a->next);
 	}
 	ft_putstr(1, "\nB:\t");
+	if (!ptr_b)
+		ft_putstr(1, " ... ");
 	while (ptr_b)
 	{
 		ft_putnbr(1, (long)(ptr_b->content));

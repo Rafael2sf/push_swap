@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:17:03 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/09 15:50:23 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/15 14:11:51 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,10 @@ void	ps_rot(t_list **s, char ab)
 		tmp = (tmp->next);
 	(tmp->next) = ptr;
 	(ptr->next) = NULL;
+	/*	
+	if (ab == 'b')
+		ps_prints(NULL, *s);
+	else
+		ps_prints(*s, NULL);
+	usleep(12300);*/
 }
