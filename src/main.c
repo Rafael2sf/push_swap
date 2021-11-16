@@ -6,14 +6,12 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/15 17:24:42 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 10:25:03 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "./libps/libps.h"
-#include <stdio.h>
-#include <time.h>
 
 int	main(int argc, char **argv)
 {
@@ -32,7 +30,7 @@ int	main(int argc, char **argv)
 		ft_putendl(1, "Error");
 		return (2);
 	}
-	ps_sort(&a, &b, argc - 1, 0);
+	ps_osort3(&a);
 	if (!b && ps_issorted(a) == 0)
 		ft_putstr(1, "\033[32mOK\033[39m\n");
 	else
@@ -44,11 +42,3 @@ int	main(int argc, char **argv)
 	ft_lstclear(&b, NULL);
 	return (0);
 }
-
-/*
-	calc average
-	while number less then avg in 5
-		go rb it
-	push back to b all 
-	then slow sort
-*/

@@ -6,12 +6,12 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/15 12:21:07 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/16 10:24:36 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Project name
-NAME	=		push_swap
+NAME	=		$(BIN_D)/push_swap
 
 # Terminal commands
 RM		=		rm -f
@@ -31,7 +31,7 @@ BIN_D	=		bin
 # Commands
 CC		=		gcc
 AR		=		ar rcs
-CFLAGS	=		-O0
+CFLAGS	=		-g -Wall -Werror -Wextra -fsanitize=address
 
 # Files
 SRCS	=		$(SRC_D)/main.c
@@ -47,7 +47,7 @@ $(OBJ_D)/%.o: $(SRC_D)%.c
 $(NAME): $(BIN_D)
 	$(MAKE) deps
 	$(MAKE) $(OBJS)
-	$(CC) $(CFLAGS) -o $(BIN_D)/$(NAME) $(SRCS) $(LIBS)
+	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) $(LIBS)
 
 deps:
 	$(MAKE) libps.a -C ./src/libps
