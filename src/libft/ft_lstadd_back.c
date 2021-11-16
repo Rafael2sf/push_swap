@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafernan <rafernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 11:03:16 by rafernan          #+#    #+#             */
-/*   Updated: 2021/10/21 13:34:10 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:07:54 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	else
 	{
 		tmp = (*lst);
-		while (tmp->next)
-			tmp = (tmp->next);
-		(tmp->next) = new;
+		while (tmp->n)
+			tmp = (tmp->n);
+		(tmp->n) = new;
 	}
 }

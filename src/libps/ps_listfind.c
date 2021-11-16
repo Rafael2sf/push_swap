@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:41:42 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/16 10:23:05 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:07:54 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ int	ps_lstfind(t_list *s, int nbr)
 	tmp = s;
 	while (tmp)
 	{
-		if ((long)(tmp->content) == nbr)
+		if ((long)(tmp->v) == nbr)
 			return (1);
-		tmp = (tmp->next);
+		tmp = (tmp->n);
 	}
 	return (0);
 }
-
 
 int	ps_lstf_bigger(t_list *s, int nbr, size_t depth)
 {
@@ -34,9 +33,9 @@ int	ps_lstf_bigger(t_list *s, int nbr, size_t depth)
 	tmp = s;
 	while (tmp && depth)
 	{
-		if ((long)(tmp->content) > nbr)
+		if ((long)(tmp->v) > nbr)
 			return (1);
-		tmp = (tmp->next);
+		tmp = (tmp->n);
 		depth--;
 	}
 	return (0);

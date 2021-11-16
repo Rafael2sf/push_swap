@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 11:12:12 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/07 12:59:25 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:07:54 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	tmp = *lst;
 	while (tmp)
 	{
-		nxtptr = (tmp->next);
+		nxtptr = (tmp->n);
 		if (del)
-			del(tmp->content);
+			del(tmp->v);
 		free(tmp);
 		tmp = nxtptr;
 	}

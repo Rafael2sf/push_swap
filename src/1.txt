@@ -1,0 +1,155 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ps_sort_y.txt                                      :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/11/13 18:00:46 by rafernan          #+#    #+#              #
+#    Updated: 2021/11/16 12:12:42 by rafernan         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#include "libps.h"
+#include <stdio.h>
+
+#define MAGIC_NUMBER 7
+
+static void	step_1(t_list **a, t_list **b);
+
+/* Somewhat sort n magic digits */
+void	step_4(t_list **a, t_list **b, size_t count)
+{
+	int	bvg;
+	
+	bvg = ps_lstavg(*b, count);
+	while (*b && ((long)ft_lstlast(*b)->v) > bvg)
+		ps_rot(b, 'b');	
+	while (*b && count)
+	{
+		if (((long)ft_lstlast(*b)->v) > ((long)(*b)->v))
+			ps_rrot(b, 'b');
+		else if (((*b)->n) && ((long)(*b)->n->v) > ((long)(*b)->v))
+			ps_swap(b, 'b');
+		else if (((long)(*b)->v) < bvg)
+		{
+			if (((*b)->n) && ((long)(*b)->n->v) < bvg)
+				ps_push(a, b, 'a');
+			else
+				ps_rot(b, 'b');
+			count--;
+		}
+		else if ((long)((*b)->v) > (long)((*a)->v))
+			ps_rot(a, 'a');
+		else
+		{
+			ps_push(a, b, 'a');
+			count--;
+		}
+	}
+}
+
+/* Sort the last numbers */
+void	step_3(t_list **a, t_list **b, size_t count)
+{
+	int bvg;
+
+	while (*b && count)
+	{	
+		bvg = ps_lstavg(*b, ft_lstsize(*b));
+		if ((*b)->n && (long)((*b)->v) < bvg)
+			ps_rot(b, 'b');	
+		else if ((*b)->n && (long)((*b)->v) < (long)((*b)->n->v))
+			ps_swap(b, 'b');
+		else if ((long)(ft_lstlast(*b)->v) > (long)((*b)->v))
+			ps_rrot(b, 'b');
+		else if ((long)(ft_lstlast(*a)->v) < (long)((*a)->v))
+			ps_rrot(a, 'a');
+		else if ((long)((*b)->v) < (long)((*a)->v))
+		{
+			if (((long)(ft_lstlast(*a)->v)) > ((long)((*b)->v)))
+				ps_rrot(a, 'a');
+			ps_push(a, b, 'a');
+			count--;
+		}
+		else
+		{
+			ps_push(b, a, 'b');
+			ps_swap(b, 'b');
+			count++;
+		}
+	}
+}
+
+/* Somewhat sort b numbers as step 1 goes */
+void	step_2(t_list **a, t_list **b)
+{
+	int	bvg;
+	
+	if (!*b || !(*b)->n || ps_issorted(*a) == 0)
+		return (step_1(a, b));
+	while (*b)
+	{
+		bvg = ps_lstavg(*b, ft_lstsize(*b));
+		if ((long)((*b)->v) < bvg)
+			ps_rot(b, 'b');
+		else if ((long)((*b)->v) < (long)((*b)->n->v))
+			ps_swap(b, 'b');
+		else if ((long)((*b)->v) < (long)(ft_lstlast(*b)->v))
+			ps_rrot(b, 'b');
+		else
+			return (step_2(a, b));
+	}
+}
+
+/* Push numbers less then avg, lowest first, from possible moves */
+void	step_1(t_list **a, t_list **b)
+{
+	int	avg;
+
+	avg = ft_lstsize(*a);
+	if (avg <= 2 || ps_issorted(*a) == 0)
+		return ;
+	avg = ps_lstavg(*a, avg);
+	if ((long)((*a)->v) < avg)
+	{
+		if ((long)((*a)->v) > (long)(ft_lstlast(*a)->v))
+			ps_rrot(a, 'a');
+		if ((long)((*a)->v) > (long)((*a)->n->v))
+			ps_swap(a, 'a');	
+		ps_push(b, a, 'b');
+	}
+	else if ((long)((*a)->n->v) < avg)
+		ps_swap(a, 'a');
+	else if (((long)(ft_lstlast(*a)->v) < avg))
+		ps_rrot(a, 'a');
+	else
+		ps_rot(a, 'a');
+	step_1(a, b);
+}
+
+void	ps_sort(t_list	**a, t_list **b, int alen, int blen)
+{
+	int	count;
+	
+	(void)(alen);
+	(void)(blen);
+	step_1(a, b);
+	blen = ft_lstsize(*b);
+	if ((long)((*a)->v) > (long)((*a)->n->v))
+		ps_swap(a, 'a');
+	if (blen > ((MAGIC_NUMBER * MAGIC_NUMBER)))
+		count = (blen / MAGIC_NUMBER) / 2;
+	else
+		count = MAGIC_NUMBER;
+	step_3(a, b, count);
+	step_4(a, b, count);
+	step_3(a, b, count);
+	//app(a, b);
+}
+
+/*
+void	ps_asort_3(t_list *a)
+{
+	
+}*/

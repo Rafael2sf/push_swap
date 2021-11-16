@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:33:07 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/09 15:29:18 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:07:54 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ t_list	*ps_lstatoi(char **list, int size)
 	{
 		if (!ps_atoi(*(list + i), &nbr) || ps_lstfind(stack, nbr))
 			ps_exit(&stack, 3);
-		(tmp->next) = ft_lstnew((void *)(long)(nbr));
-		if (!tmp->next)
+		(tmp->n) = ft_lstnew((void *)(long)(nbr));
+		if (!tmp->n)
 			ps_exit(&stack, 3);
-		tmp = (tmp->next);
+		tmp = (tmp->n);
 	}
 	return (stack);
 }

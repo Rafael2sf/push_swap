@@ -18,14 +18,14 @@ void	ps_rrot(t_list **s, char ab)
 
 	if (ab)
 		ft_printf("rr%c\n", ab);
-	if (!s || !*s || !((*s)->next))
+	if (!s || !*s || !((*s)->n))
 		return ;
 	tmp = (*s);
-	while (tmp->next->next)
-		tmp = (tmp->next);
-	(tmp->next->next) = (*s);
-	(*s) = (tmp->next);
-	(tmp->next) = NULL;
+	while (tmp->n->n)
+		tmp = (tmp->n);
+	(tmp->n->n) = (*s);
+	(*s) = (tmp->n);
+	(tmp->n) = NULL;
 	/*		
 	if (ab == 'b')
 		ps_prints(NULL, *s);

@@ -6,12 +6,12 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/16 10:24:36 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/16 13:50:47 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Project name
-NAME	=		$(BIN_D)/push_swap
+NAME	=		push_swap
 
 # Terminal commands
 RM		=		rm -f
@@ -47,10 +47,10 @@ $(OBJ_D)/%.o: $(SRC_D)%.c
 $(NAME): $(BIN_D)
 	$(MAKE) deps
 	$(MAKE) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) $(LIBS)
+	$(CC) $(CFLAGS) -o $(BIN_D)/$(NAME) $(SRCS) $(LIBS)
 
 deps:
-	$(MAKE) libps.a -C ./src/libps
+	$(MAKE) -C ./src/libps
 
 $(BIN_D):
 	mkdir $(BIN_D)
@@ -59,7 +59,7 @@ clean:
 	$(RM) $(OBJ_D)/*.o $(LIB_D)/*.a 
 
 fclean: clean
-	$(RM) -rf $(OBJ_D) $(LIB_D) $(BIN_D)
+	$(RM) -r $(OBJ_D) $(LIB_D) $(BIN_D)
 
 re: fclean all
 

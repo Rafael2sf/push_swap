@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafernan <rafernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 11:18:21 by rafernan          #+#    #+#             */
-/*   Updated: 2021/10/21 11:29:41 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:07:54 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	if (!lst || !f || !del)
 		return (NULL);
 	iter = lst;
-	tmp = ft_lstnew(f(iter->content));
+	tmp = ft_lstnew(f(iter->v));
 	if (!tmp)
 		return (NULL);
 	res = tmp;
-	iter = (iter->next);
+	iter = (iter->n);
 	while (iter)
 	{
-		(tmp->next) = ft_lstnew(f(iter->content));
-		if (!(tmp->next))
+		(tmp->n) = ft_lstnew(f(iter->v));
+		if (!(tmp->n))
 		{
 			ft_lstclear(&res, del);
 			return (NULL);
 		}
 		else
-			tmp = (tmp->next);
-		iter = (iter->next);
+			tmp = (tmp->n);
+		iter = (iter->n);
 	}
 	return (res);
 }

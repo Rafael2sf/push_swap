@@ -1,14 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ps_sortr.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/13 13:27:17 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/13 16:31:23 by rafernan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ps_sort_z.txt                                      :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/11/13 13:27:17 by rafernan          #+#    #+#              #
+#    Updated: 2021/11/16 12:07:54 by rafernan         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 #define SRT_DIV 10
 
@@ -22,11 +22,11 @@ void	sortr3(t_list **a, t_list **b, int count)
 
 	size = count;
 	avg = ps_lstavg(*b, size);
-	while (((long)ft_lstlast(*b)->content) > avg)
+	while (((long)ft_lstlast(*b)->v) > avg)
 		ps_rrot(b, 'b');
 	while (ps_lstf_bigger(*b, avg, size))
 	{
-		if ((long)((*b)->content) > avg)
+		if ((long)((*b)->v) > avg)
 		{
 			ps_push(a, b, 'a');
 			size--;
@@ -42,9 +42,9 @@ void	sortr2(t_list **a, t_list **b, int len)
 	long bvg;
 
 	bvg = ps_lstavg(*b, len);
-	while (((long)(*b)->content) > bvg)
+	while (((long)(*b)->v) > bvg)
 	{
-		if ((long)((*b)->content) < (long)((*a)->content))
+		if ((long)((*b)->v) < (long)((*a)->v))
 		{
 			ps_push(a, b, 'a');
 			len--;
@@ -83,21 +83,21 @@ void	sortr(t_list **a, t_list **b, int alen, int blen)
 
 	if (alen <= 2)
 	{
-		if (alen == 2 && (long)((*a)->content) > (long)((*a)->next->content))
+		if (alen == 2 && (long)((*a)->v) > (long)((*a)->n->v))
 			ps_swap(a, 'a');
 		return (sortr1(a, b));
 	}
 	avg = ps_lstavg(*a, alen);
 	bvg = ps_lstavg(*b, blen);
 	(void)(bvg);
-	if ((long)((*a)->content) < avg)
+	if ((long)((*a)->v) < avg)
 	{
 		ps_push(b, a, 'b');
-		if ((long)((*b)->content) < bvg)
+		if ((long)((*b)->v) < bvg)
 			ps_rot(b, 'b');
 		sortr(a, b, alen - 1, blen + 1);
 	}
-	else if ((long)(ft_lstlast(*a)->content) < avg)
+	else if ((long)(ft_lstlast(*a)->v) < avg)
 	{
 		ps_rrot(a, 'a');
 		ps_push(b, a, 'b');

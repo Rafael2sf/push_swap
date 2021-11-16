@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 20:23:35 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/15 14:11:34 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:13:09 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	ps_swap(t_list **s, char ab)
 
 	if (ab)
 		ft_printf("s%c\n", ab);
-	if (!s || !(*s) || !((*s)->next))
+	if (!s || !(*s) || !((*s)->n))
 		return ;
-	tmp = ((*s)->next);
-	((*s)->next) = ((*s)->next->next);
-	(tmp->next) = (*s);
+	tmp = ((*s)->n);
+	((*s)->n) = ((*s)->n->n);
+	(tmp->n) = (*s);
 	(*s) = tmp;
 	/*	
 	if (ab == 'a')

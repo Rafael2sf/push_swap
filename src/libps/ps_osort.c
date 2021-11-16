@@ -6,37 +6,73 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 10:21:35 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/16 10:23:21 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:22:05 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 
-/* optimized sort for list of size 3 */
-void	ps_osort3(t_list **a)
+// Totaly not hardcoded
+
+static void	ps_osort3b(t_list **a, t_list **b)
 {
-	if (!a || !(*a)->next)
-		return ;
-	if (!(*a)->next->next)
+	if (*b && (*b)->n && (long)(*b)->v < (long)(*b)->n->v
+		&& (long)(*a)->v > (long)(*a)->n->n->v)
+		ps_rr(a, b);
+	else if ((long)(*a)->v > (long)(*a)->n->n->v)
+		ps_rot(a, 'a');
+	if (*b && (*b)->n && (long)(*b)->v < (long)(*b)->n->v
+		&& (long)(*a)->v > (long)(*a)->n->v)
+		ps_ss(a, b);
+	else if ((long)(*a)->v > (long)(*a)->n->v)
+		ps_swap(a, 'a');
+}
+
+void	ps_osort3(t_list **a, t_list **b)
+{
+	if (!(*a)->n->n)
 	{
-		if (L(*a)->content > L(*a)->next->content)
+		if ((long)(*a)->v > (long)(*a)->n->v)
 			ps_swap(a, 'a');
-		return ;
 	}
-	if (L(*a)->content < L(*a)->next->content)
+	else if ((long)(*a)->v < (long)(*a)->n->v)
 	{
-		if (L(*a)->next->content > L(*a)->next->next->content)
+		if (*b && (*b)->n && (long)(*b)->v < (long)(*b)->n->v
+			&& (long)(*a)->n->v > (long)(*a)->n->n->v)
+			ps_rrr(a, b);
+		else if ((long)(*a)->n->v > (long)(*a)->n->n->v)
 			ps_rrot(a, 'a');
-		if (L(*a)->content > L(*a)->next->content)
+		if (*b && (*b)->n && (long)(*b)->v < (long)(*b)->n->v
+			&& (long)(*a)->v > (long)(*a)->n->v)
+			ps_ss(a, b);
+		else if ((long)(*a)->v > (long)(*a)->n->v)
 			ps_swap(a, 'a');
-		return ;
 	}
-	else if (L(*a)->content > L(*a)->next->content)
+	else if ((long)(*a)->v > (long)(*a)->n->v)
+		ps_osort3b(a, b);
+}
+
+void	ps_osort5(t_list **a, t_list **b, size_t a_siz, int avg)
+{
+	if (!a || !b || a_siz > 5)
+		return ;
+	while (a_siz > 3)
 	{
-		if (L(*a)->content > L(*a)->next->next->content)
-			ps_rot(a, 'a');
-		if (L(*a)->content > L(*a)->next->content)
+		if ((long)(*a)->v < avg)
+		{
+			ps_push(b, a, 'b');
+			a_siz--;
+		}
+		else if ((long)(ft_lstlast(*a))->v < avg)
+			ps_rrot(a, 'a');
+		else if ((long)(*a)->n->v < avg)
 			ps_swap(a, 'a');
-		return ;
+		else
+			ps_rot(a, 'a');
 	}
+	ps_osort3(a, b);
+	if (*b && (*b)->n && (long)(*b)->v < (long)(*b)->n->v)
+		ps_swap(b, 'b');
+	while (*b)
+		ps_push(a, b, 'a');
 }

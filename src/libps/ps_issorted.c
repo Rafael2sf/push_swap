@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:50:15 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/16 10:23:02 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:07:54 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int	ps_issorted(t_list	*a)
 		return (-1);
 	tmp = a;
 	count = 1;
-	while (tmp->next)
+	while (tmp->n)
 	{
-		if ((long)(tmp->content) > (long)(tmp->next->content))
+		if ((long)(tmp->v) > (long)(tmp->n->v))
 			return (count);
 		count++;
-		tmp = (tmp->next);
+		tmp = (tmp->n);
 	}
 	return (0);
 }

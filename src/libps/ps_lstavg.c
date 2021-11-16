@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 13:51:59 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/15 14:12:12 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:07:54 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	ps_lstavg(t_list *s, size_t	len)
 
 	if (!s)
 		return (0);
-	tmp = (s->next);
-	n = (int)(long)(s->content);
+	tmp = (s->n);
+	n = (int)(long)(s->v);
 	d = 1;
 	while (tmp && len)
 	{
-		n = (d * n) + (int)(long)(tmp->content);
+		n = (d * n) + (int)(long)(tmp->v);
 		n /= ++d;
-		tmp = (tmp->next);
+		tmp = (tmp->n);
 		len--;
 	}
 	return ((int)n);

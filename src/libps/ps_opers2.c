@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_push.c                                          :+:      :+:    :+:   */
+/*   ps_opers2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 21:00:20 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/16 12:07:54 by rafernan         ###   ########.fr       */
+/*   Created: 2021/11/16 11:35:58 by rafernan          #+#    #+#             */
+/*   Updated: 2021/11/16 13:40:30 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 
-void	ps_push(t_list **a, t_list **b, char ab)
+void	ps_ss(t_list **a, t_list **b)
 {
-	t_list	*tmp;
+	ps_swap(a, '\0');
+	ps_swap(b, '\0');
+	ft_putstr(1, "ss\n");
+}
 
-	if (ab)
-		ft_printf("p%c\n", ab);
-	if (!b || !*b)
-		return ;
-	tmp = (*b);
-	(*b) = ((*b)->n);
-	if (a && *a)
-		(tmp->n) = (*a);
-	else
-		(tmp->n) = NULL;
-	(*a) = tmp;
-	tmp = NULL;
-	/*	
-	if (ab == 'b')
-		ps_prints(*b, *a);
-	else
-		ps_prints(*a, *b);
-	usleep(12300);
-*/
+void	ps_rr(t_list **a, t_list **b)
+{
+	ps_rot(a, '\0');
+	ps_rot(b, '\0');
+	ft_putstr(1, "rr\n");
+}
+
+void	ps_rrr(t_list **a, t_list **b)
+{
+	ps_rrot(a, '\0');
+	ps_rrot(b, '\0');
+	ft_putstr(1, "rrr\n");
 }

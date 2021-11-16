@@ -9,11 +9,11 @@ if (a <= avg)
 {
 	if (a > last)
 		rra
-	if (a > a->next)
+	if (a > a->n)
 		sa
 	pb
 }
-else if (a->next <= avg)
+else if (a->n <= avg)
 	sa
 else if (a->last <= avg)
 	rra
@@ -25,7 +25,7 @@ then
 loop <->
 if (b < b->last || b < avg)
 	rb
-eif (b < b->next)
+eif (b < b->n)
 	sb
 else
 	break ;
@@ -47,7 +47,7 @@ if (b->last > b)
 	pa
 if (b < bvg)
 	rb
-if (b < b->next)
+if (b < b->n)
 	sb
 if (b < a)
 	pa
@@ -70,12 +70,10 @@ while
  --- (b)
 	is less then avg go rb;
 	eif
-	bnext is bigger swapb
+	bn is bigger swapb
  --- (a)
 	eif a < b
 		ra
 	else
 		pa
-
-
 12

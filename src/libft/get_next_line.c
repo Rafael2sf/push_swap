@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_n_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,155 +12,91 @@
 
 #include "libft.h"
 
-/* Same as ft_strdup except it returns a null pointer
-	instead of a empty string */
-char	*gnl_strdup(const char *s)
+static char	*gnl_getline(char **rdbuff, char **buff, char *strg, size_t rdbl)
 {
-	char	*str;
-	int		len;
-
-	if (s)
-	{
-		len = ft_strlen(s);
-		if (!len)
-			return (NULL);
-		str = (char *)malloc(sizeof(char) * (len + 1));
-		if (!str)
-			return (NULL);
-		ft_memcpy(str, s, len);
-		*(str + len) = '\0';
-		return (str);
-	}
-	return (NULL);
-}
-
-/**
- * Allocates len + 1 bytes and copies the string. 
- * Merges storage with new line, 
- * and stores the reminder of buf in storage.
- * @param s storage might be empity
- * @param b buf containing a new line
- * @param len line size
-*/
-static char	*gnl_trim(char **s, char **b, ssize_t len)
-{	
 	char	*line;
-	char	*tmp;
-	ssize_t	i;
+	size_t	bufflen;
 
-	i = ft_strlen(*s);
-	line = (char *)malloc(sizeof(char) * len + i + 1);
+	bufflen = ft_strlen(*buff);
+	line = (char *)malloc(sizeof(char) * bufflen + rdbl + 1);
 	if (!line)
 		return (NULL);
-	ft_memcpy(line, *s, i);
-	ft_memcpy(line + i, *b, len);
-	line[i + len] = '\0';
-	tmp = gnl_strdup((*b) + len);
-	if (*s)
-		free(*s);
-	(*s) = tmp;
+	ft_memcpy(line, (*buff), bufflen);
+	ft_memcpy(line + bufflen, (*rdbuff), rdbl);
+	line[bufflen + rdbl] = '\0';
+	bufflen = 0;
+	while ((*rdbuff)[rdbl])
+		strg[bufflen++] = (*rdbuff)[rdbl++];
+	strg[bufflen] = '\0';
+	if (*buff)
+		free(*buff);
 	return (line);
 }
 
-/**
- * Allocared n bytes + 1 and copies the string. 
- * Then updates the storage keeping the remainder.
- * @param s storage containing newline
- * @param n the size of the new line
- * @param return returns the new line
- */
-static char	*gnl_getline(char **s, ssize_t n)
+static char	*gnl_read(int fd, char **rdbuff, char **buff, char *strg)
 {
-	char	*ptr;
 	char	*tmp;
-	ssize_t	i;
+	size_t	bytes;
 
-	if (n < 0)
-		return (NULL);
-	tmp = (char *)malloc(sizeof(char) * (n + 1));
-	if (!tmp)
-		return (NULL);
-	i = -1;
-	while (++i != n)
-		tmp[i] = (*s)[i];
-	tmp[i] = '\0';
-	ptr = gnl_strdup(*s + i);
-	free(*s);
-	(*s) = ptr;
-	return (tmp);
+	tmp = *buff;
+	while (1)
+	{
+		bytes = read(fd, (*rdbuff), BUFFER_SIZE);
+		if (bytes < 0)
+			return (NULL);
+		if (bytes == 0)
+			return (*buff);
+		(*rdbuff)[bytes] = '\0';
+		tmp = ft_strchr(*rdbuff, '\n');
+		if (tmp)
+			return (gnl_getline(rdbuff, buff, strg, tmp - (*rdbuff) + 1));
+		tmp = ft_strjoin(*buff, *rdbuff);
+		if (*buff)
+			free(*buff);
+		if (!tmp)
+			return (NULL);
+		(*buff) = tmp;
+	}
 }
 
-/**
- * If i is 0, it means you reached end of file, 
- * therefore it returns a pointer to storage. 
- * Otherwise looks for a newline in buf. If true calls gnl_trim, 
- * else merges storage with buf
- * @param s storage string
- * @param b buffer string
- * @param i result of read()
- * @param return returns the new line
-*/
-static char	*gnl_read(char **s, char **b, ssize_t i)
+static char	*gnl_strgl(char *strg, size_t slen)
 {
-	char	*ptr;
-	char	*tmp;
+	char	*line;
+	size_t	i;
 
-	ptr = NULL;
-	if (i <= 0)
-	{
-		if (i == 0 && *s)
-		{
-			ptr = (*s);
-			(*s) = NULL;
-		}
-		return (ptr);
-	}
-	(*b)[i] = '\0';
-	tmp = ft_strchr(*b, '\n');
-	if (tmp)
-		ptr = gnl_trim(s, b, (tmp - *b) + 1);
-	else
-	{
-		tmp = ft_strjoin(*s, *b);
-		if (*s)
-			free(*s);
-		(*s) = tmp;
-	}
-	return (ptr);
+	line = (char *)malloc(sizeof(char) * slen + 1);
+	if (!line)
+		return (NULL);
+	ft_memcpy(line, strg, slen);
+	line[slen] = '\0';
+	i = 0;
+	while (strg[slen])
+		strg[i++] = strg[slen++];
+	strg[i] = '\0';
+	return (line);
 }
 
-/**
- * Looks for a new line in storage. 
- * if true calls gnl_getline to get line from storage 
- * else allocates buffer, reads BUFFER_SIZE and calls gnl_read.
- * @param fd file descriptor
- * @param return a pointer to the line otherwise null
- */
 char	*get_next_line(int fd)
 {
-	static char	*storage;
+	static char	strg[FD_MAX][BUFFER_SIZE + 1];
 	char		*line;
-	char		*buf;
-	ssize_t		i;
+	char		*rdbuf;
+	char		*buff;
 
-	i = 1;
-	line = NULL;
-	if ((read(fd, NULL, 0) == -1) || (fd < 0 || fd > 1024) || BUFFER_SIZE <= 0)
-		return (0);
-	buf = ft_strchr(storage, '\n');
-	if (!buf)
+	buff = NULL;
+	if (fd < 0 || fd > FD_MAX || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
+		return (NULL);
+	buff = ft_strchr(strg[fd], '\n');
+	if (!buff)
 	{
-		buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!buf)
+		buff = ft_strdup(strg[fd]);
+		strg[fd][0] = '\0';
+		rdbuf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+		if (!rdbuf)
 			return (NULL);
-		while (line == NULL && i > 0)
-		{
-			i = read(fd, buf, BUFFER_SIZE);
-			line = gnl_read(&storage, &buf, i);
-		}
-		free(buf);
+		line = gnl_read(fd, &rdbuf, &buff, strg[fd]);
+		free(rdbuf);
 		return (line);
 	}
-	line = gnl_getline(&storage, (buf - storage) + 1);
-	return (line);
+	return (gnl_strgl(strg[fd], buff - strg[fd] + 1));
 }

@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 16:11:32 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/13 12:52:38 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/16 13:51:15 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIB_D	=		../../libs
 # Compiling commands
 CC		=		gcc
 AR		=		ar rcs
-CFLAGS	=		-g -Wall -Werror -Wextra
+CFLAGS	=		-g -Wall -Werror -Wextra -fsanitize=address
 
 # Files
 SRCS	=		$(shell find . -maxdepth 1 -name "*.c")
@@ -50,7 +50,7 @@ $(NAME): deps $(OBJ_D) $(LIB_D)
 	$(AR) $(LIB_D)/$@ $(OBJS)
 
 deps:
-	$(MAKE) libft.a -C ../libft
+	$(MAKE) -C ../libft
 
 $(OBJ_D):
 	$(MD) $(OBJ_D)

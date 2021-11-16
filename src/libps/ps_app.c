@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 13:46:26 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/15 12:13:50 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/16 13:45:52 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ void	ps_prints(t_list *a, t_list *b)
 		ft_putstr(1, " ... ");
 	while (ptr_a)
 	{
-		ft_putnbr(1, (long)(ptr_a->content));
+		ft_putnbr(1, (long)(ptr_a->v));
 		ft_putchar(1, ' ');
-		ptr_a = (ptr_a->next);
+		ptr_a = (ptr_a->n);
 	}
 	ft_putstr(1, "\nB:\t");
 	if (!ptr_b)
 		ft_putstr(1, " ... ");
 	while (ptr_b)
 	{
-		ft_putnbr(1, (long)(ptr_b->content));
+		ft_putnbr(1, (long)(ptr_b->v));
 		ft_putchar(1, ' ');
-		ptr_b = (ptr_b->next);
+		ptr_b = (ptr_b->n);
 	}
 	ft_putchar(1, '\n');
 }
