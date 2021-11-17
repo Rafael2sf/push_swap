@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:40:41 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/17 15:44:10 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:31:30 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,23 @@ void	ps_step_3(t_list **a, t_list **b, int len)
 {
 	long bvg;
 
-	bvg = ps_lstavg(*b, len);
-	while (*b)
+	while (len > 4)
 	{
-		if ((long)((*b)->v) < (long)((*a)->v))
-		{
-			ps_push(a, b, 'a');
-			len--;
-		}
-		else
+		len = ft_lstsize(*b);
+		bvg = ps_lstavg(*b, len);
+		if ((*b)->n && (long)((*b)->v) < bvg)
+			ps_rot(b, 'b');
+		else if ((*b)->n && (long)((*b)->v) < (long)((*b)->n->v))
+			ps_swap(b, 'b');
+		else if ((*b)->n && (long)(ft_lstlast(*b)->v) > (long)((*b)->v))
+			ps_rrot(b, 'b');
+		else if (*b && (long)((*b)->v) > (long)(*a)->v)
 		{
 			ps_push(b, a, 'b');
 			ps_swap(b, 'b');
 		}
-		bvg = ps_lstavg(*b, len);
+		else
+			ps_push(a, b, 'b');
 	}
 }
 
@@ -149,6 +152,5 @@ void	ps_sort(t_list **a, t_list **b)
 		len = ft_lstsize(*a);
 	}
 	ps_osort3(a, b);
-	len = ft_lstsize(*b);
-	ps_step_3(a, b, len);
+	ps_step_3(a, b, ft_lstsize(*b));
 }
