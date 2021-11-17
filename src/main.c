@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/16 15:58:38 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/17 13:30:13 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	push_swap(t_list **a, t_list **b, size_t len)
 		return ;
 	if (len <= 5)
 		return (ps_osort5(a, b, len, ps_lstavg(*a, len)));
+	ps_sort(a, b);
 }
 
 void	show(t_list *a, t_list *b)
@@ -32,6 +33,16 @@ void	show(t_list *a, t_list *b)
 	if (!b)
 		ft_putstr(1, "(empty)");
 	ft_putchar(1, '\n');
+}
+
+void	status(t_list *a, t_list *b)
+{
+	if (ps_issorted(a) != 0)
+		ft_putstr(1, "\033[31mKO\033[39m\n");
+	else if (b)
+		ft_putstr(1, "\033[33mKO\033[39m\n");
+	else
+		ft_putstr(1, "\033[32mOK\033[39m\n");
 }
 
 int	main(int argc, char **argv)
@@ -53,10 +64,7 @@ int	main(int argc, char **argv)
 	}
 	push_swap(&a, &b, argc - 1);
 	show(a, b);
-	if (!b && ps_issorted(a) == 0)
-		ft_putstr(1, "\033[32mOK\033[39m\n");
-	else
-		ft_putstr(1, "\033[31mKO\033[39m\n");
+	status(a, b);
 	ft_lstclear(&a, NULL);
 	ft_lstclear(&b, NULL);
 	return (0);

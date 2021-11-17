@@ -6,11 +6,27 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 13:51:59 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/16 12:07:54 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/17 15:38:29 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
+
+int		ps_lstmin(t_list *a)
+{
+	int		min;
+	t_list	*tmp;
+
+	tmp = a;
+	min = INT_MAX;
+	while (tmp)
+	{
+		if (min > (int)(long)((tmp)->v))
+			min = (int)(long)((tmp)->v);
+		tmp = (tmp->n);
+	}
+	return (min);
+}
 
 int	ps_lstavg(t_list *s, size_t	len)
 {

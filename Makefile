@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/16 13:50:47 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/17 13:06:05 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ $(OBJ_D)/%.o: $(SRC_D)%.c
 $(NAME): $(BIN_D)
 	$(MAKE) deps
 	$(MAKE) $(OBJS)
-	$(CC) $(CFLAGS) -o $(BIN_D)/$(NAME) $(SRCS) $(LIBS)
+	$(CC) $(CFLAGS) -o $(BIN_D)/$(NAME) $(OBJS) $(LIBS)
 
 deps:
 	$(MAKE) -C ./src/libps
