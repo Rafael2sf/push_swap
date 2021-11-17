@@ -6,22 +6,19 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:40:41 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/17 16:31:30 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/17 17:26:14 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 #include <stdio.h>
 
-#define DIVISOR 15
-
 void	ps_step_3(t_list **a, t_list **b, int len)
 {
-	long bvg;
+	int bvg;
 
-	while (len > 4)
+	while (*b)
 	{
-		len = ft_lstsize(*b);
 		bvg = ps_lstavg(*b, len);
 		if ((*b)->n && (long)((*b)->v) < bvg)
 			ps_rot(b, 'b');
@@ -37,73 +34,6 @@ void	ps_step_3(t_list **a, t_list **b, int len)
 		else
 			ps_push(a, b, 'b');
 	}
-}
-
-int		magic(int avg, int min, int div)
-{
-	return (((avg - min) / div) + min);
-}
-
-int	ps_get_div(int len)
-{
-	int	cur;
-	int	ret;
-
-	cur = DIVISOR;
-	ret = 1;
-	while (cur < len)
-	{
-		cur *= 2;
-		ret++;
-	}
-	return (ret);
-}
-
-/* Find the shortest way to get a number from A less then val */
-int	ps_calc_next(t_list **a, int val, int len)
-{
-	t_list	*tmp;
-	size_t	i;
-	size_t	j;
-	size_t	cur;
-
-	i = 0;
-	tmp = *a;
-	while (((long)(tmp->v)) > val)
-	{
-		tmp = (tmp->n);
-		i++;
-	}
-	j = 0;
-	cur = 0;
-	tmp = *a;
-	while (tmp)
-	{
-		if (((long)(tmp->v)) > val)
-			j = cur;
-		tmp = (tmp->n);
-		cur++;
-	}
-	if ((len - j) < i)
-		return (1);
-	return (0);
-}
-
-/* Not working as intended */
-void	ps_push_next(t_list **a, int val, int move)
-{
-	(void)(move);
-	/*
-	if (move == 1)
-	{
-		while (*a && (*a)->n && ((long)(ft_lstlast(*a)->v)) >= val)
-			ps_rrot(a, 'a');
-		ps_rrot(a, 'a');
-	}
-	else
-	{*/
-	while (*a && (*a)->n && (long)((*a)->v) >= val)
-		ps_rot(a, 'a');
 }
 
 /* Sort B as you go */
@@ -126,10 +56,14 @@ void	step_1(t_list **a, t_list **b, int val, int len)
 		ps_rrot(a, 'a');
 	if ((long)(*a)->v < val && (long)(*a)->v > (long)(*a)->n->v)
 		ps_swap(a, 'a');
-	if (((long)(*a)->v) < val)
+	if (((long)(*a)->v) <= val)
 		ps_push(b, a, 'b');
 	else
-		ps_push_next(a, val, ps_calc_next(a, val, len));
+	{
+		/* missing get_next */
+		while (*a && (*a)->n && (long)((*a)->v) >= val)
+			ps_rot(a, 'a');
+	}
 }
 
 void	ps_sort(t_list **a, t_list **b)
@@ -145,7 +79,7 @@ void	ps_sort(t_list **a, t_list **b)
 		if (len < DIVISOR)
 			avg = ps_lstavg(*a, len);
 		else
-			avg = magic(ps_lstavg(*a, len), ps_lstmin(*a), ps_get_div(len));
+			avg = ps_block(ps_lstavg(*a, len), ps_lstmin(*a), ps_div(len));
 		step_1(a, b, avg, len);
 		avg = ps_lstavg(*b, DIVISOR);
 		step_2(a, b, avg);

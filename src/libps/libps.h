@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 20:21:13 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/17 12:52:57 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/17 17:02:11 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "../libft/libft.h"
 
+#define DIVISOR 15
+
 /* Exits progam, freeing memory in case of error */
 void	ps_exit(t_list	**stack, int ret);
 /* Writes void as long number to stdout */
@@ -22,7 +24,7 @@ void	ps_putvl(void *x);
 
 /* Convert a list of arguments to linked list of ints */
 t_list	*ps_lstatoi(char **list, int size);
-/* Converts str to nbr, if number overflows or underflows int, nbr is set to 0 */
+/* Converts str to nbr, if number overflows or underflows int returns 0 */
 int		ps_atoi(const char *str, int *nbr);
 /* Search for nbr in linked list */
 int		ps_lstfind(t_list *s, int nbr);
@@ -59,7 +61,12 @@ int		ps_issorted(t_list *a);
 void	ps_osort3(t_list **a, t_list **b);
 /* Optimized sort for list of size 5 */
 void	ps_osort5(t_list **a, t_list **b, size_t a_siz, int avg);
-/* TO DO */
+
+/* Calculates the block size based on DIVISOR */
+int		ps_div(int len);
+/*	Returns the correct value */
+int		ps_block(int avg, int min, int div);
+/* Sorts the list */
 void	ps_sort(t_list **a, t_list **b);
 
 #endif
