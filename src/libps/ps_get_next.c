@@ -6,57 +6,63 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:52:05 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/17 17:20:34 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:43:16 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 
-/* NOT WORKING TO DO */
-
-/* Find the shortest way to get a number from A less then val */
-int	ps_calc_next(t_list **a, int val, int len)
+static size_t	ps_calc_ra(t_list *a, int val)
 {
 	t_list	*tmp;
 	size_t	i;
-	size_t	j;
-	size_t	cur;
 
 	i = 0;
-	tmp = *a;
-	while (((long)(tmp->v)) > val)
+	tmp = a;
+	while (tmp)
 	{
+		if (((long)(tmp->v)) <= val)
+			break ;
 		tmp = (tmp->n);
 		i++;
 	}
-	j = 0;
-	cur = 0;
-	tmp = *a;
-	while (tmp)
-	{
-		if (((long)(tmp->v)) > val)
-			j = cur;
-		tmp = (tmp->n);
-		cur++;
-	}
-	if ((len - j) < i)
-		return (1);
-	return (0);
+	return (i);
 }
 
-/* Not working as intended */
-void	ps_push_next(t_list **a, int val, int move)
+static size_t	ps_calc_rra(t_list *a, int val)
 {
-	(void)(move);
-	/*
-	if (move == 1)
+	t_list	*tmp;
+	size_t	cur;
+	size_t	i;
+
+	i = 0;
+	cur = 0;
+	tmp = a;
+	while (tmp)
 	{
-		while (*a && (*a)->n && ((long)(ft_lstlast(*a)->v)) >= val)
-			ps_rrot(a, 'a');
-		ps_rrot(a, 'a');
+		if (((long)(tmp->v)) <= val)
+			cur = i;
+		tmp = (tmp->n);
+		i++;
+	}
+	return (i - cur);
+}
+
+void	ps_get_next(t_list **a, int val)
+{
+	size_t	ra;
+	size_t	rra;
+
+	ra = ps_calc_ra(*a, val);
+	rra = ps_calc_rra(*a, val);
+	if (ra <= rra)
+	{
+		while (*a && (*a)->n && ra--)
+			ps_rot(a, 'a');
 	}
 	else
-	{*/
-	while (*a && (*a)->n && (long)((*a)->v) >= val)
-		ps_rot(a, 'a');
+	{
+		while (*a && (*a)->n && rra--)
+			ps_rrot(a, 'a');
+	}
 }

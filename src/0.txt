@@ -1,5 +1,5 @@
 ruby -e "puts (1..100).to_a.shuffle.join(' ')"
-
+./bin/push_swap $(ruby -e "puts (-10000...10000).to_a.shuffle.join(' ')" | xargs | tr ' ' '\n' | head -n 500 | tr '\n' ' ') | wc -l
 Average sort
 (Missing implementation of ss rr and rrr)
 

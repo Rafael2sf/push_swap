@@ -6,23 +6,23 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:55:44 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/17 17:20:36 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/18 10:18:21 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 
-int		ps_block(int avg, int min, int div)
+int		ps_magic(int avg, int min, int div)
 {
 	return (((avg - min) / div) + min);
 }
 
-int		ps_div(int len)
+int		ps_calcd(int len)
 {
 	int	cur;
 	int	ret;
 
-	cur = DIVISOR;
+	cur = PS_BLOCK;
 	ret = 1;
 	while (cur < len)
 	{

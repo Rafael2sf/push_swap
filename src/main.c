@@ -6,14 +6,15 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/17 13:30:13 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/18 11:24:14 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "./libps/libps.h"
+#include "stdio.h"
 
-static void	push_swap(t_list **a, t_list **b, size_t len)
+void	push_swap(t_list **a, t_list **b, size_t len)
 {
 	if (!*a || len <= 1 || ps_issorted(*a) == 0)
 		return ;
@@ -62,9 +63,7 @@ int	main(int argc, char **argv)
 		ft_putstr(2, "Error\n");
 		return (2);
 	}
-	push_swap(&a, &b, argc - 1);
-	show(a, b);
-	status(a, b);
+	push_swap(&a , &b, argc - 1);
 	ft_lstclear(&a, NULL);
 	ft_lstclear(&b, NULL);
 	return (0);

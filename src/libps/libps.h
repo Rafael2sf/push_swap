@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 20:21:13 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/17 17:02:11 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:26:09 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 
-#define DIVISOR 15
+#define PS_BLOCK 20
 
 /* Exits progam, freeing memory in case of error */
 void	ps_exit(t_list	**stack, int ret);
@@ -61,12 +61,13 @@ int		ps_issorted(t_list *a);
 void	ps_osort3(t_list **a, t_list **b);
 /* Optimized sort for list of size 5 */
 void	ps_osort5(t_list **a, t_list **b, size_t a_siz, int avg);
-
-/* Calculates the block size based on DIVISOR */
-int		ps_div(int len);
-/*	Returns the correct value */
-int		ps_block(int avg, int min, int div);
 /* Sorts the list */
 void	ps_sort(t_list **a, t_list **b);
+
+void	ps_get_next(t_list **a, int val);
+/* Calculates the block size based on PS_BLOCK */
+int		ps_calcd(int len);
+/*	Returns the correct value */
+int		ps_magic(int avg, int min, int div);
 
 #endif
