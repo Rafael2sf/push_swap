@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:40:41 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/18 16:04:11 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/19 16:54:28 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,15 @@ void	ps_step_3(t_list **a, t_list **b, int len)
 	{
 		bvg = ps_lstavg(*b, len);
 		if ((*b)->n && (long)((*b)->v) <= bvg)
+		{
+			if ((*b)->n && (long)((*b)->v) > (long)(ft_lstlast(*b)->v))
+			{
+				ps_rrot(b, 'b');
+				ps_swap(b, 'b');
+				ps_rot(b, 'b');
+			}
 			ps_rot(b, 'b');
+		}
 		if ((*b)->n && (long)((*b)->v) < (long)((*b)->n->v))
 		{
 			/*if (*a && (*a)->n && ((long)(*a)->v) > ((long)(*a)->n->v))
@@ -101,7 +109,7 @@ void	ps_sort(t_list **a, t_list **b)
 	{
 		avg = ps_magic(ps_lstavg(*a, len), ps_lstmin(*a), ps_calcd(len));
 		ps_step_1(a, b, avg, len);
-		ps_step_2(a, b, ps_lstavg(*b, 4));
+		ps_step_2(a, b, ps_lstavg(*b, 3));
 		len = ft_lstsize(*a);
 	}
 	ps_osort3(a, b);

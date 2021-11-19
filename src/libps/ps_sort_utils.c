@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:55:44 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/18 10:18:21 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/19 16:51:48 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ps_calcd(int len)
 
 	cur = PS_BLOCK;
 	ret = 1;
-	while (cur < len)
+	while (cur <= len)
 	{
 		cur *= 2;
 		ret++;
