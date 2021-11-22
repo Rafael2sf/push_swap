@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 20:21:13 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/22 12:26:16 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:45:28 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 
-#define PS_BLOCK 10
+#define PS_BLOCK 3
 
 /* Exits progam, freeing memory in case of error */
 void	ps_exit(t_list	**stack, int ret);

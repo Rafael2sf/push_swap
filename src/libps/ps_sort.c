@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:40:41 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/22 13:45:26 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:47:07 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,44 @@ void	ps_step_2(t_list **a, t_list **b)
 {
 	while (*b && (*b)->n)
 	{
-		if ((L(*b)V) < L(*b)N)
-			ps_swap(a, b, 'a');
+		// if smaller swap b
+		if ((L(*b)V) < (L(*b)N))
+			ps_swap(b, 'b');
+		// if smaller reverse rotate b
+		else if ((L(*b)V) < L(ft_lstlast(*b)V))
+			ps_rrot(b, 'b');
+		/*
+		else if (L(ft_lstlast(*a)V) < (L(*a)V) && L(ft_lstlast(*a)V) > (L(*b)V))
+			ps_rrot(a, 'a'); */
+		// if b is smaller then a push
+		else if ((L(*b)V) < (L(*a)V))
+		{
+			ps_push(a, b, 'a');
+		}
+		// find next smaller to push // Improve
+		else
+		{
+			ps_get_next(b, (L(*a)V) - 1);
+			ps_push(a, b, 'a');
+		}
 	}
 }
 
 void	ps_step_1(t_list **a, t_list **b, int avg)
 {
+	/*
 	// if last is smaller then top
 	if ((L(*a)V) > (L(ft_lstlast(*a)V)))
 		ps_rrot(a, 'a');
-	/**/
 	if ((L(*a)V) > (L(*a)N))
 	{
 		if (*b && (*b)->n && (L(*b)V) < (L(*b)N))
 			ps_ss(a, b);
 		else
 			ps_swap(a, 'a');
-	}
-	// if a top is less then avg and is bigger then next
-	if ((L(*a)V) > avg)
+	} 
+	// if a top is less then avg and is bigger then next */
+	if ((L(*a)V) >= avg)
 		ps_get_next(a, avg);
 	ps_push(b, a, 'b');
 
@@ -51,17 +69,7 @@ void	ps_step_1(t_list **a, t_list **b, int avg)
 		return ;
 	// if b is smaller then nn
 	if ((*b)->n->n && (L(*b)V) < (L(*b)NN))
-	{
-		/* if last is bigger then v */
-		if ((L(*b)V) < (L(ft_lstlast(*b)V)))
-		{
-			/*
-			ps_rrot(b, 'b');
-			ps_swap(b, 'b');
-			ps_rot(b, 'b');*/
-		}
 		ps_rot(b, 'b');
-	}
 	// if b is less then n
 	if ((L(*b)V) < (L(*b)N))
 	{
@@ -85,4 +93,6 @@ void	ps_sort(t_list **a, t_list **b)
 		len = ft_lstsize(*a);
 	}
 	ps_osort3(a, b);
+	ps_step_2(a, b);
+	ps_push(a, b, 'a');
 }
