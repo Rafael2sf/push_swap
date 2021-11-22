@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 20:21:13 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/19 16:54:26 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/22 12:26:16 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 
-#define PS_BLOCK 15
+#define PS_BLOCK 10
 
 /* Exits progam, freeing memory in case of error */
 void	ps_exit(t_list	**stack, int ret);
@@ -66,7 +66,7 @@ void	ps_sort(t_list **a, t_list **b);
 
 void	ps_get_next(t_list **a, int val);
 /* Calculates the block size based on PS_BLOCK */
-int		ps_calcd(int len);
+int		ps_calcd(void);
 /*	Returns the correct value */
 int		ps_magic(int avg, int min, int div);
 

@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/19 16:54:45 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/22 11:34:03 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	push_swap(t_list **a, t_list **b, size_t len)
 	if (!*a || len <= 1 || ps_issorted(*a) == 0)
 		return ;
 	if (len <= 5)
-		return (ps_osort5(a, b, len, ps_lstavg(*a, len)));
+		return (ps_osort5(a, b, ft_lstsize(*a), ps_lstavg(*a, len)));
 	ps_sort(a, b);
 }
 
@@ -64,6 +64,7 @@ int	main(int argc, char **argv)
 		return (2);
 	}
 	push_swap(&a , &b, argc - 1);
+	show(a, b);
 	ft_lstclear(&a, NULL);
 	ft_lstclear(&b, NULL);
 	return (0);

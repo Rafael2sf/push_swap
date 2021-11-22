@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:55:44 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/19 16:51:48 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/22 12:24:37 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int		ps_magic(int avg, int min, int div)
 	return (((avg - min) / div) + min);
 }
 
-int		ps_calcd(int len)
+int		ps_calcd(void)
 {
 	int	cur;
 	int	ret;
 
-	cur = PS_BLOCK;
+	cur = 5;
 	ret = 1;
-	while (cur <= len)
+	while (cur < PS_BLOCK)
 	{
 		cur *= 2;
 		ret++;
