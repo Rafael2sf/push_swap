@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_listfind.c                                      :+:      :+:    :+:   */
+/*   ps_lst_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:41:42 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/17 15:30:39 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:10:05 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 
-int	ps_lstfind(t_list *s, int nbr)
+int		ps_lstfind(t_list *s, int nbr)
 {
 	t_list	*tmp;
 
@@ -26,17 +26,18 @@ int	ps_lstfind(t_list *s, int nbr)
 	return (0);
 }
 
-int	ps_lstf_bigger(t_list *s, int nbr, size_t depth)
+int		ps_lstmin(t_list *a)
 {
+	int		min;
 	t_list	*tmp;
 
-	tmp = s;
-	while (tmp && depth)
+	tmp = a;
+	min = INT_MAX;
+	while (tmp)
 	{
-		if ((long)(tmp->v) > nbr)
-			return (1);
+		if (min > (int)(long)((tmp)->v))
+			min = (int)(long)((tmp)->v);
 		tmp = (tmp->n);
-		depth--;
 	}
-	return (0);
+	return (min);
 }

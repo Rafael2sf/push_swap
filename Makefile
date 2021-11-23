@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/17 13:06:05 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/23 12:06:17 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,10 +56,10 @@ $(BIN_D):
 	mkdir $(BIN_D)
 
 clean:
-	$(RM) $(OBJ_D)/*.o $(LIB_D)/*.a 
+	$(RM) $(OBJ_D)/*.o $(LIB_D)/*.a $(BIN_D)/$(NAME)
 
 fclean: clean
-	$(RM) -r $(OBJ_D) $(LIB_D) $(BIN_D)
+	$(RM) -r $(OBJ_D) $(LIB_D) $(BIN_D) 
 
 re: fclean all
 

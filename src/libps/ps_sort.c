@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:40:41 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/22 17:47:07 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:20:49 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #define N ->n->v
 #define NN ->n->n->v
 #define L (long)
-
+/*
 void	ps_step_2(t_list **a, t_list **b)
 {
 	while (*b && (*b)->n)
@@ -28,9 +28,9 @@ void	ps_step_2(t_list **a, t_list **b)
 		// if smaller reverse rotate b
 		else if ((L(*b)V) < L(ft_lstlast(*b)V))
 			ps_rrot(b, 'b');
-		/*
+
 		else if (L(ft_lstlast(*a)V) < (L(*a)V) && L(ft_lstlast(*a)V) > (L(*b)V))
-			ps_rrot(a, 'a'); */
+			ps_rrot(a, 'a');
 		// if b is smaller then a push
 		else if ((L(*b)V) < (L(*a)V))
 		{
@@ -42,6 +42,63 @@ void	ps_step_2(t_list **a, t_list **b)
 			ps_get_next(b, (L(*a)V) - 1);
 			ps_push(a, b, 'a');
 		}
+	}
+}
+*/
+
+ssize_t	ps_lstmaxp(t_list *a, ssize_t len)
+{
+	t_list	*tmp;
+	ssize_t	max;
+	ssize_t	cur;
+	ssize_t	i;
+
+	if (!a)
+		return (0);
+	tmp = a;
+	max = (ssize_t)((tmp)->v);
+	cur = 0;
+	i = 0;
+	while (tmp)
+	{
+		if (max < (ssize_t)((tmp)->v))
+		{
+			max = (ssize_t)((tmp)->v);
+			i = cur;
+		}
+		tmp = (tmp->n);
+		cur++;
+	}
+	if (i > (len / 2))
+		return (len - i);
+	return (-i);
+}
+
+void	ps_step_2(t_list **a, t_list **b)
+{
+	ssize_t	maxp;
+
+	while ((*b)->n)
+	{
+		maxp = ps_lstmaxp(*b, ft_lstsize(*b));
+		if (maxp == -1)
+			ps_swap(b, 'b');
+		else
+		{
+			while (maxp > 0)
+			{
+				ps_rrot(b, 'b');
+				maxp--;
+			}
+			while (maxp < 0)
+			{
+				ps_rot(b, 'b');
+				maxp++;
+			}
+		}
+		ps_push(a, b, 'a');
+		if ((long)(*a)->v > (long)(*a)->n->v)
+			ps_swap(a, 'a');
 	}
 }
 
@@ -86,13 +143,16 @@ void	ps_sort(t_list **a, t_list **b)
 	int	len;
 
 	len = ft_lstsize(*a);
-	while (*a && len > 3)
+	while (len > 2)
 	{
-		avg = ps_magic(ps_lstavg(*a, len), ps_lstmin(*a), ps_calcd());
+		avg = ps_magic(ps_lstavg(*a, len), ps_lstmin(*a), ps_calcd(len));
+		//ft_printf("(%d)", avg);
 		ps_step_1(a, b, avg);
-		len = ft_lstsize(*a);
+		len--;
 	}
 	ps_osort3(a, b);
 	ps_step_2(a, b);
 	ps_push(a, b, 'a');
+	if ((long)(*a)->v > (long)(*a)->n->v)
+		ps_swap(a, 'a');
 }

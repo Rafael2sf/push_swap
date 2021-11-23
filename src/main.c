@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/22 11:34:03 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:21:37 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,39 @@
 #include "./libps/libps.h"
 #include "stdio.h"
 
+int		ps_lowest2(t_list *a)
+{
+	t_list	*tmp;
+	int		min;
+	int		n;
+
+	tmp = a;
+	n = INT_MAX;
+	min = ps_lstmin(a);
+	while (tmp)
+	{
+		if ((long)(tmp->v) < n && (long)(tmp->v) != min)
+			n = (long)(tmp->v);
+		tmp = (tmp->n);
+	}
+	return (n);
+}
+
 void	push_swap(t_list **a, t_list **b, size_t len)
 {
 	if (!*a || len <= 1 || ps_issorted(*a) == 0)
 		return ;
-	if (len <= 5)
-		return (ps_osort5(a, b, ft_lstsize(*a), ps_lstavg(*a, len)));
-	ps_sort(a, b);
+	if (len <= 3)
+		return (ps_osort3(a, b));
+	else if (len <= 5)
+		return (ps_osort5(a, b, ft_lstsize(*a), ps_lowest2(*a)));
+	else if (len <= 100)
+		ps_sort(a, b);
+	else
+		ft_printf(":(\n");
 }
+
+// Delete
 
 void	show(t_list *a, t_list *b)
 {
@@ -63,8 +88,9 @@ int	main(int argc, char **argv)
 		ft_putstr(2, "Error\n");
 		return (2);
 	}
-	push_swap(&a , &b, argc - 1);
+	push_swap(&a , &b, ft_lstsize(a));
 	show(a, b);
+	status(a, b);
 	ft_lstclear(&a, NULL);
 	ft_lstclear(&b, NULL);
 	return (0);

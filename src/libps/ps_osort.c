@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 10:21:35 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/22 10:55:07 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:01:46 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ void	ps_osort5(t_list **a, t_list **b, size_t a_siz, int avg)
 		return ;
 	while (a_siz > 3)
 	{
-		if ((long)(*a)->v < avg)
+		if ((long)(*a)->v <= avg)
 		{
 			ps_push(b, a, 'b');
 			a_siz--;
 		}
-		else if ((long)(ft_lstlast(*a))->v < avg)
+		else if ((long)(ft_lstlast(*a))->v <= avg)
 			ps_rrot(a, 'a');
-		else if ((long)(*a)->n->v < avg)
+		else if ((long)(*a)->n->v <= avg)
 			ps_swap(a, 'a');
 		else
 			ps_rot(a, 'a');
