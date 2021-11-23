@@ -6,13 +6,13 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:41:42 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/23 15:10:05 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:56:23 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 
-int		ps_lstfind(t_list *s, int nbr)
+int	ps_lstfind(t_list *s, int nbr)
 {
 	t_list	*tmp;
 
@@ -26,7 +26,7 @@ int		ps_lstfind(t_list *s, int nbr)
 	return (0);
 }
 
-int		ps_lstmin(t_list *a)
+int	ps_lstmin(t_list *a)
 {
 	int		min;
 	t_list	*tmp;

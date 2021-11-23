@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:33:07 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/19 16:34:48 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 17:17:38 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ps_lstatoi(char **list, int size)
 	int		i;
 	int		nbr;
 
-	if (size <= 0 || !list)
+	if (size <= 0 || !list || !*(*list))
 		return (NULL);
 	if (!ps_atoi(*list, &nbr))
 		return (NULL);
@@ -30,7 +30,7 @@ t_list	*ps_lstatoi(char **list, int size)
 	i = 0;
 	while (++i < size)
 	{
-		if (!ps_atoi(*(list + i), &nbr) || ps_lstfind(stack, nbr))
+		if (!*(list[i]) || !ps_atoi(*(list + i), &nbr) || ps_lstfind(stack, nbr))
 			ps_exit(&stack, 3);
 		(tmp->n) = ft_lstnew((void *)(long)(nbr));
 		if (!tmp->n)

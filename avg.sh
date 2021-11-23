@@ -55,10 +55,12 @@ if [ -f $FILE_PATH ]; then
 	do
 		N=`expr $(./bin/push_swap $(ruby -e "puts (-10000...10000).to_a.shuffle.join(' ')" | tr ' ' '\n' | head -n $SIZE | tr '\n' ' ') | wc -l)`
 		TOTAL=$(( $TOTAL + $N ))
-		if [ $COUNT -le 5 ]; then
+		if [ $SIZE -le 5 ]; then
 			case5 $N;
-		elif [ $COUNT -le 100 ]; then
+		elif [ $SIZE -le 100 ]; then
 			case100 $N;
+		else
+			printf "$N\n";
 		fi
 	done
 else

@@ -6,13 +6,11 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 10:21:35 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/23 15:01:46 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:56:10 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
-
-// Totaly not hardcoded
 
 static void	ps_osort3b(t_list **a, t_list **b)
 {

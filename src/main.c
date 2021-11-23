@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/23 15:21:37 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 17:21:10 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "./libps/libps.h"
 #include "stdio.h"
 
-int		ps_lowest2(t_list *a)
+static int	ps_lowest2(t_list *a)
 {
 	t_list	*tmp;
 	int		min;
@@ -34,19 +34,25 @@ int		ps_lowest2(t_list *a)
 
 void	push_swap(t_list **a, t_list **b, size_t len)
 {
-	if (!*a || len <= 1 || ps_issorted(*a) == 0)
+	if (!*a || len <= 0)
+		ps_exit(a, 2);
+	if (len == 1 || ps_issorted(*a) == 0)
 		return ;
 	if (len <= 3)
 		return (ps_osort3(a, b));
 	else if (len <= 5)
 		return (ps_osort5(a, b, ft_lstsize(*a), ps_lowest2(*a)));
-	else if (len <= 100)
-		ps_sort(a, b);
 	else
-		ft_printf(":(\n");
+		ps_sort(a, b);
 }
 
-// Delete
+/*
+
+void	ps_putvl(void *x)
+{
+	ft_putnbr(1, (long)(x));
+	ft_putchar(1, ' ');
+}
 
 void	show(t_list *a, t_list *b)
 {
@@ -70,6 +76,7 @@ void	status(t_list *a, t_list *b)
 	else
 		ft_putstr(1, "\033[32mOK\033[39m\n");
 }
+*/
 
 int	main(int argc, char **argv)
 {
@@ -78,7 +85,7 @@ int	main(int argc, char **argv)
 
 	if (argc <= 1)
 	{
-		ft_putstr(2, "Usage: ./push_swap 0 1 2 3\n");
+		ft_putstr(2, "Error\n");
 		exit(1);
 	}
 	b = NULL;
@@ -86,11 +93,9 @@ int	main(int argc, char **argv)
 	if (!a)
 	{
 		ft_putstr(2, "Error\n");
-		return (2);
+		exit(2);	
 	}
-	push_swap(&a , &b, ft_lstsize(a));
-	show(a, b);
-	status(a, b);
+	push_swap(&a, &b, ft_lstsize(a));
 	ft_lstclear(&a, NULL);
 	ft_lstclear(&b, NULL);
 	return (0);

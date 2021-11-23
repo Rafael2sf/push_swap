@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:40:20 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/18 11:32:01 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:56:19 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ void	ps_swap(t_list **s, char ab)
 	((*s)->n) = ((*s)->n->n);
 	(tmp->n) = (*s);
 	(*s) = tmp;
-	/*	
-	if (ab == 'a')
-		ps_prints(*s, NULL);
-	else
-		ps_prints(NULL, *s);
-	usleep(12300);
-	*/
 }	
 
 void	ps_push(t_list **a, t_list **b, char ab)
@@ -49,13 +42,6 @@ void	ps_push(t_list **a, t_list **b, char ab)
 		(tmp->n) = NULL;
 	(*a) = tmp;
 	tmp = NULL;
-	/*	
-	if (ab == 'b')
-		ps_prints(*b, *a);
-	else
-		ps_prints(*a, *b);
-	usleep(12300);
-*/
 }
 
 void	ps_rot(t_list **s, char ab)
@@ -74,12 +60,6 @@ void	ps_rot(t_list **s, char ab)
 		tmp = (tmp->n);
 	(tmp->n) = ptr;
 	(ptr->n) = NULL;
-	/*	
-	if (ab == 'b')
-		ps_prints(NULL, *s);
-	else
-		ps_prints(*s, NULL);
-	usleep(12300);*/
 }
 
 void	ps_rrot(t_list **s, char ab)
@@ -96,12 +76,4 @@ void	ps_rrot(t_list **s, char ab)
 	(tmp->n->n) = (*s);
 	(*s) = (tmp->n);
 	(tmp->n) = NULL;
-	/*		
-	if (ab == 'b')
-		ps_prints(NULL, *s);
-	else
-		ps_prints(*s, NULL);
-	ps_prints(*s, NULL);
-	usleep(12300);
-*/
 }

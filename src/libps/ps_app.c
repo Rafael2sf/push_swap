@@ -6,10 +6,11 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 13:46:26 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/17 17:21:33 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:56:37 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "libps.h"
 
 void	ps_prints(t_list *a, t_list *b)
@@ -91,3 +92,4 @@ void	app(t_list **a, t_list **b)
 		ps_prints(*a, *b);
 	}
 }
+*/

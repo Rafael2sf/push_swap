@@ -6,17 +6,11 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:02:07 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/17 15:42:44 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 17:02:24 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libps.h"
-
-void	ps_putvl(void *x)
-{
-	ft_putnbr(1, (long)(x));
-	ft_putchar(1, ' ');
-}
 
 void	ps_exit(t_list **stack, int ret)
 {

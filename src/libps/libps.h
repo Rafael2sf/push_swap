@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 20:21:13 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/23 14:55:36 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:48:44 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 
-#define PS_BLOCK 11
+# define PS_BLOCK 21
 
 /* Exits progam, freeing memory in case of error */
 void	ps_exit(t_list	**stack, int ret);
@@ -51,9 +51,9 @@ void	ps_rr(t_list **a, t_list **b);
 void	ps_rrr(t_list **a, t_list **b);
 
 /* Temporary app function to test sorting moves */
-void	app(t_list **a, t_list **b);
-/* Temporary function to print stacks onto the screen */ 
-void	ps_prints(t_list *a, t_list *b);
+//void	app(t_list **a, t_list **b);
+/* Temporary function to print stacks onto the screen */
+//void	ps_prints(t_list *a, t_list *b);
 
 /* Check if stack is organized from smallest to bigger */
 int		ps_issorted(t_list *a);
@@ -64,10 +64,13 @@ void	ps_osort5(t_list **a, t_list **b, size_t a_siz, int avg);
 /* Sorts the list */
 void	ps_sort(t_list **a, t_list **b);
 
+/* Puts the next number to be pushed on top of stack */
 void	ps_get_next(t_list **a, int val);
+/* Similar to get next but reversed */
+ssize_t	ps_lstmaxp(t_list *a, ssize_t len);
 /* Calculates the block size based on PS_BLOCK */
 int		ps_calcd(size_t len);
-/*	Returns the correct value */
-int		ps_magic(int avg, int min, int div);
+/*	Returns the maximum value of the next number to push */
+int		ps_nmax(int avg, int min, int div);
 
 #endif
