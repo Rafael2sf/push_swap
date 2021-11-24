@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 11:34:36 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/16 15:33:00 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/24 18:27:01 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ NAME	=		libft.a
 RM		=		rm -f
 MD		=		mkdir
 PRNT	=		printf
+M		=		make
 
 # Colors
 C_GRN	=		\033[32m
@@ -31,21 +32,21 @@ LIB_D	=		../../libs
 # Compiling commands
 CC		=		gcc
 AR		=		ar rcs
-CFLAGS	=		-g -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	=		-g -Wall -Werror -Wextra
 
 # Files
 SRCS	=		$(shell find . -maxdepth 1 -name "*.c")
 OBJS	=		$(patsubst $(SRC_D)%.c,$(OBJ_D)/%.o,$(SRCS))
 
 # Rules
-all: $(LIB_D)/$(NAME)
+all: $(NAME)
 
-$(OBJ_D)/%.o: $(SRC_D)%.c
+$(OBJ_D)/%.o: $(SRC_D)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIB_D)/$(NAME): $(OBJ_D) $(LIB_D)
-	$(MAKE) $(OBJS)
+$(NAME): libft.a $(OBJ_D) $(LIB_D) $(OBJS)
 	$(AR) $@ $(OBJS)
+	cp $(NAME) ../libps/$(NAME)
 
 $(OBJ_D):
 	$(MD) $(OBJ_D)
@@ -57,7 +58,7 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(LIB_D)/$(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

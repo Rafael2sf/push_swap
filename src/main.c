@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/24 12:24:50 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/24 17:57:44 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	push_swap(t_list **a, t_list **b, size_t len)
 	else
 		ps_sort(a, b);
 }
-
 /*
 
 void	ps_putvl(void *x)

@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/24 12:36:16 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/24 18:26:45 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ NAME	=		push_swap
 # Terminal commands
 RM		=		rm -f
 PRNT	=		printf
+M		=		make
 
 # Colors
 C_GRN	=		\033[32m
@@ -31,35 +32,33 @@ BIN_D	=		bin
 # Commands
 CC		=		gcc
 AR		=		ar rcs
-CFLAGS	=		-g -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	=		-g -Wall -Werror -Wextra
 
 # Files
 SRCS	=		$(SRC_D)/main.c
-OBJS	=		$(patsubst $(SRC_D)%.c,$(OBJ_D)/%.o,$(SRCS))
-LIBS	=		$(LIB_D)/libps.a
+OBJS	=		$(patsubst $(SRC_D)/%.c,$(OBJ_D)/%.o,$(SRCS))
+LIBS	=		./src/libps/libps.a
 
 # Rules
 all: $(NAME)
 
-$(OBJ_D)/%.o: $(SRC_D)%.c
+$(OBJ_D)/%.o: $(SRC_D)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(BIN_D)
-	$(MAKE) deps
-	$(MAKE) $(OBJS)
-	$(CC) $(CFLAGS) -o $(BIN_D)/$(NAME) $(OBJS) $(LIBS)
+$(NAME): deps $(BIN_D)
+	$(CC) $(CFLAGS) ./src/main.c -o $(BIN_D)/$(NAME)
 
 deps:
-	$(MAKE) -C ./src/libps
+	$(M) libps.a -C ./src/libps
 
 $(BIN_D):
 	mkdir $(BIN_D)
 
 clean:
-	$(RM) $(OBJ_D)/*.o $(LIB_D)/*.a $(BIN_D)/$(NAME)
+	$(RM) $(OBJS) $(BIN_D)/$(NAME)
 
 fclean: clean
-	$(RM) -r $(OBJ_D) $(LIB_D) $(BIN_D) 
+	$(RM) -r $(OBJ_D) $(LIB_D) $(BIN_D)
 
 re: fclean all
 
