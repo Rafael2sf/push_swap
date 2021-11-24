@@ -1,4 +1,0 @@
-calc avg
-nth moves to get next less then avg
-push to b
-

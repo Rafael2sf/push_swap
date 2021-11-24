@@ -6,17 +6,12 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:40:41 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/24 10:45:32 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/24 12:36:24 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 #include <stdio.h>
-
-#define V ->v
-#define N ->n->v
-#define NN ->n->n->v
-#define L (long)
 
 void	ps_step_2(t_list **a, t_list **b)
 {
@@ -45,16 +40,16 @@ void	ps_step_2(t_list **a, t_list **b)
 
 void	ps_step_1(t_list **a, t_list **b, int avg)
 {
-	if ((L(*a)V) >= avg)
+	if ((long)(*a)->v >= avg)
 		ps_get_next(a, avg);
 	ps_push(b, a, 'b');
 	if (!*b || !(*b)->n)
 		return ;
-	if ((*b)->n->n && (L(*b)V) < (L(*b)NN))
+	if ((*b)->n->n && (long)(*b)->v < (long)(*b)->n->n->v)
 		ps_rot(b, 'b');
-	if ((L(*b)V) < (L(*b)N))
+	if ((long)(*b)->v < (long)(*b)->n->v)
 	{
-		if ((L(*a)V) < (L(*a)N))
+		if ((long)(*a)->v < (long)(*a)->n->v)
 			ps_ss(a, b);
 		else
 			ps_swap(b, 'b');
@@ -74,7 +69,7 @@ void	ps_sort(t_list **a, t_list **b)
 		len--;
 	}
 	len = ft_lstsize(*b);
-	if ((L(*a)V) > (L(*a)N))
+	if ((long)(*a)->v > (long)(*a)->n->v)
 		ps_swap(a, 'a');
 	while (len > 1)
 	{

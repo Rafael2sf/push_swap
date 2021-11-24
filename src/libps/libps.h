@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 20:21:13 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/24 10:18:02 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/24 12:26:07 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 /* Exits progam, freeing memory in case of error */
 void	ps_exit(t_list	**stack, int ret);
-/* Writes void as long number to stdout */
-void	ps_putvl(void *x);
+/* Writes void as long number to stdout 
+void	ps_putvl(void *x);*/
 
 /* Convert a list of arguments to linked list of ints */
 t_list	*ps_lstatoi(char **list, int size);
