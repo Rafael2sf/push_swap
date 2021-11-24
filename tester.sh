@@ -18,7 +18,7 @@ else
 fi
 
 if [ -z "$2" ]; then
-	COUNT=50
+	COUNT=10
 else
 	COUNT=$2
 fi
@@ -32,11 +32,10 @@ function case5 () {
 	else
 		printf "$C_RED";
 	fi
-	printf "$N\n";
+	printf "$N\t";
 	printf "$C_WHT"
 }
 
-# Funtions
 function case100 () {
 	if [ $1 -le 700 ]; then
 		printf "$C_GRN";
@@ -45,7 +44,19 @@ function case100 () {
 	else
 		printf "$C_RED";
 	fi
-	printf "$N\n";
+	printf "$N\t";
+	printf "$C_WHT"
+}
+
+function case500 () {
+	if [ $1 -le 5500 ]; then
+		printf "$C_GRN";
+	elif [ $1 -le 7000 ]; then
+		printf "$C_YEL";
+	else
+		printf "$C_RED";
+	fi
+	printf "$N\t";
 	printf "$C_WHT"
 }
 
@@ -53,19 +64,23 @@ function case100 () {
 if [ -f $FILE_PATH ]; then
 	for i in `seq 1 $COUNT`
 	do
-		N=`expr $(./bin/push_swap $(ruby -e "puts (-10000...10000).to_a.shuffle.join(' ')" | tr ' ' '\n' | head -n $SIZE | tr '\n' ' ') | wc -l)`
+		LIST=$(ruby -e "puts (-10000..10000).to_a.shuffle.join(' ')" | tr ' ' '\n' | head -n $SIZE | tr '\n' ' ')
+		N=`expr $($FILE_PATH $LIST | wc -l)`
 		TOTAL=$(( $TOTAL + $N ))
 		if [ $SIZE -le 5 ]; then
 			case5 $N;
 		elif [ $SIZE -le 100 ]; then
 			case100 $N;
+		elif [ $SIZE -le 500 ]; then
+			case500 $N;
 		else
-			printf "$N\n";
+			printf "$N\t";
 		fi
+		$FILE_PATH $LIST | ./checker $LIST
 	done
 else
 	printf "Missing file";
 	exit 1
 fi
 
-printf "\t$(( $TOTAL / $COUNT ))\n"
+printf "\nAverage: $(( $TOTAL / $COUNT ))\n"

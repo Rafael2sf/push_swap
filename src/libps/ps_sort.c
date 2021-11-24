@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:40:41 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/23 16:55:56 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/24 10:45:32 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,15 @@ void	ps_sort(t_list **a, t_list **b)
 	int	len;
 
 	len = ft_lstsize(*a);
-	while (len > 3)
+	while (len >= 3)
 	{
 		avg = ps_nmax(ps_lstavg(*a, len), ps_lstmin(*a), ps_calcd(len));
 		ps_step_1(a, b, avg);
 		len--;
 	}
 	len = ft_lstsize(*b);
-	ps_osort3(a, b);
+	if ((L(*a)V) > (L(*a)N))
+		ps_swap(a, 'a');
 	while (len > 1)
 	{
 		ps_step_2(a, b);

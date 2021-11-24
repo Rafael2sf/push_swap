@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/23 17:21:10 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/24 11:05:42 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	push_swap(t_list **a, t_list **b, size_t len)
 		ps_sort(a, b);
 }
 
-/*
+/**/
 
 void	ps_putvl(void *x)
 {
@@ -76,7 +76,6 @@ void	status(t_list *a, t_list *b)
 	else
 		ft_putstr(1, "\033[32mOK\033[39m\n");
 }
-*/
 
 int	main(int argc, char **argv)
 {
@@ -84,17 +83,14 @@ int	main(int argc, char **argv)
 	t_list	*b;
 
 	if (argc <= 1)
-	{
-		ft_putstr(2, "Error\n");
-		exit(1);
-	}
-	b = NULL;
+		return (1);
 	a = ps_lstatoi(argv + 1, argc - 1);
 	if (!a)
 	{
 		ft_putstr(2, "Error\n");
 		exit(2);	
 	}
+	b = NULL;
 	push_swap(&a, &b, ft_lstsize(a));
 	ft_lstclear(&a, NULL);
 	ft_lstclear(&b, NULL);

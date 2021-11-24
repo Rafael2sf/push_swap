@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 10:21:35 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/23 16:56:10 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/24 10:28:12 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,6 @@ void	ps_osort5(t_list **a, t_list **b, size_t a_siz, int avg)
 		ps_swap(b, 'b');
 	while (*b)
 		ps_push(a, b, 'a');
+	if ((long)(*a)->v > (long)(*a)->n->v)
+		ps_swap(a, 'a');
 }
