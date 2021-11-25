@@ -6,59 +6,76 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 11:34:36 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/24 18:27:01 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/25 10:40:52 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Project name
 NAME	=		libft.a
 
-# Commands
-RM		=		rm -f
-MD		=		mkdir
-PRNT	=		printf
-M		=		make
+################### TERMINAL ############
 
-# Colors
-C_GRN	=		\033[32m
-C_DEF	=		\033[39m
-C_RED	=		\033[31m
+RMV		=		rm -f
+MKD		=		mkdir
+PRT		=		printf
+MKE		=		make
+CPY		=		cp
 
-# Directories
-SRC_D	=		./
-OBJ_D	=		../../obj
-LIB_D	=		../../libs
+################### COLORS ##############
 
-# Compiling commands
+--GRN	=		\033[32m
+--RED	=		\033[31m
+--WHT	=		\033[39m
+
+################### DIRS ################
+
+_SRC	=		.
+_OBJ	=		../../obj
+_LIB	=		../../libs
+_BIN	=		../../bin
+
+################### COMPILER ############
+
 CC		=		gcc
 AR		=		ar rcs
-CFLAGS	=		-g -Wall -Werror -Wextra
+CF		=		-Wall -Werror -Wextra
 
-# Files
+################### FILES ###############
+
 SRCS	=		$(shell find . -maxdepth 1 -name "*.c")
-OBJS	=		$(patsubst $(SRC_D)%.c,$(OBJ_D)/%.o,$(SRCS))
+OBJS	=		$(patsubst $(_SRC)/%.c,$(_OBJ)/%.o,$(SRCS))
 
-# Rules
+################### RULES ###############
+
 all: $(NAME)
 
-$(OBJ_D)/%.o: $(SRC_D)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(_OBJ)/%.o: $(_SRC)/%.c
+	$(CC) $(CF) -c $< -o $@
 
-$(NAME): libft.a $(OBJ_D) $(LIB_D) $(OBJS)
+$(NAME): $(_LIB) $(_LIB)/$(NAME)
+$(_LIB)/$(NAME): $(_OBJ) $(OBJS)
 	$(AR) $@ $(OBJS)
-	cp $(NAME) ../libps/$(NAME)
 
-$(OBJ_D):
-	$(MD) $(OBJ_D)
+################### STRUCTURE ###########
 
-$(LIB_D):
-	$(MD) $(LIB_D)
+$(_OBJ):
+	$(MKD) $(_OBJ)
+
+$(_LIB):
+	$(MKD) $(_LIB)
+
+$(_SRC):
+	$(MKD) $(_SRC)
+
+$(_BIN):
+	$(MKD) $(_BIN)
+
+################### CLEAN ###############
 
 clean:
-	$(RM) $(OBJS)
+	$(RMV) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RMV) $(_LIB)/$(NAME)
 
 re: fclean all
 

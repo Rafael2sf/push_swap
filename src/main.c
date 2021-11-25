@@ -6,13 +6,11 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 17:30:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/24 17:57:44 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/25 10:50:00 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
 #include "./libps/libps.h"
-#include "stdio.h"
 
 static int	ps_lowest2(t_list *a)
 {

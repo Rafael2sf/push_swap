@@ -6,62 +6,91 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 16:11:32 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/24 18:26:26 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/25 10:44:58 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Project name
+############# STATIC LIBRARY ############
+
 NAME	=		libps.a
 
-# Terminal commands
-RM		=		rm -f
-PRNT	=		printf
-MD		=		mkdir
-M		=		make
-CP		=		cp
-# Colors
-C_GRN	=		\033[32m
-C_DEF	=		\033[39m
-C_RED	=		\033[31m
+################ TERMINAL ###############
 
-# Directories
-SRC_D	=		./
-OBJ_D	=		../../obj
-LIB_D	=		../../libs
+RMV		=		rm -f
+MKD		=		mkdir
+PRT		=		printf
+MKE		=		make
+CPY		=		cp
 
-# Compiling commands
+################# COLORS ################
+
+--GRN	=		\033[32m
+--RED	=		\033[31m
+--WHT	=		\033[39m
+
+################# DIRS ##################
+
+_SRC	=		.
+_OBJ	=		../../obj
+_LIB	=		../../libs
+_BIN	=		../../bin
+
+############### COMPILER ################
+
 CC		=		gcc
 AR		=		ar rcs
-CFLAGS	=		-g -Wall -Werror -Wextra -fsanitize=address
+CF		=		-Wall -Werror -Wextra
 
-# Files
+################ FILES ##################
+
 SRCS	=		$(shell find . -maxdepth 1 -name "*.c")
-OBJS	=		$(patsubst $(SRC_D)%.c,$(OBJ_D)/%.o,$(SRCS))
-LIBS	=		../libft/libft.a
+OBJS	=		$(patsubst $(_SRC)/%.c,$(_OBJ)/%.o,$(SRCS))
+DEPS	=		libft.a
 
-# Rules
-all: deps $(NAME)
+################ RULES ##################
 
-$(OBJ_D)/%.o: $(SRC_D)/%.c
-	$(CC) $(CFLAGS) -o $@ -c $<
+all: $(NAME)
 
-$(NAME): $(OBJ_D) $(LIB_D) $(OBJS)
-	$(M) libft.a -C ../libft
-	$(AR) libft.a $(OBJS)
-	mv libft.a $(NAME)
+$(_OBJ)/%.o: $(_SRC)/%.c
+	$(CC) $(CF) -c $< -o $@
 
-$(OBJ_D):
-	$(MD) $(OBJ_D)
+$(NAME): deps $(_LIB) $(_LIB)/$(NAME)
+$(_LIB)/$(NAME): $(_OBJ) $(OBJS)
+	$(CPY) $(_LIB)/libft.a $@
+	$(AR) $@ $(OBJS)
 
-$(LIB_D):
-	$(MD) $(LIB_D)
+################ DEPS ###################
+
+deps: $(DEPS)
+
+libft.a:
+	$(MKE) libft.a -C ../libft
+
+############## STRUCTURE ################
+
+$(_OBJ):
+	$(MKD) $(_OBJ)
+
+$(_LIB):
+	$(MKD) $(_LIB)
+
+$(_SRC):
+	$(MKD) $(_SRC)
+
+$(_BIN):
+	$(MKD) $(_BIN)
+
+################### CLEAN ###############
 
 clean:
-	$(RM) $(OBJS)
+	$(RMV) $(OBJS)
 
-fclean: clean
-	$(RM) $(NAME)
+dclean:
+	$(MKE) fclean -C ../libft	
+
+fclean: clean dclean
+	$(RMV) $(_LIB)/$(NAME)
 
 re: fclean all
 
-.PHONY: all deps clean fclean re
+.PHONY: all clean fclean re
