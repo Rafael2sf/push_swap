@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 16:11:32 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/25 11:37:33 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/25 12:35:56 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,19 @@ CF		=		-Wall -Werror -Wextra
 
 ################ FILES ##################
 
-SRCS	=		$(shell find . -maxdepth 1 -name "*.c")
+SRCS	=		\
+				$(_SRC)/ps_atoi.c \
+				$(_SRC)/ps_get_next.c \
+				$(_SRC)/ps_issorted.c \
+				$(_SRC)/ps_lst_utils.c \
+				$(_SRC)/ps_opers.c \
+				$(_SRC)/ps_opers2.c \
+				$(_SRC)/ps_osort.c \
+				$(_SRC)/ps_sort.c \
+				$(_SRC)/ps_sort_utils.c \
+				$(_SRC)/ps_utils.c \
+				$(_SRC)/push_swap.c
+				
 OBJS	=		$(patsubst $(_SRC)/%.c,$(_OBJ)/%.o,$(SRCS))
 
 ################ RULES ##################
