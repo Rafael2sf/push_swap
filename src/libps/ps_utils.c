@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:02:07 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/24 12:40:29 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/25 11:51:05 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void	ps_exit(t_list **stack, int ret)
 {
 	ft_lstclear(stack, NULL);
-	ft_putendl(2, "Error");
+	ft_putstr(2, "Error\n");
 	exit(ret);
 }

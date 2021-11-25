@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:40:20 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/24 17:04:45 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/25 11:58:32 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ps_swap(t_list **s, char ab)
 	((*s)->n) = ((*s)->n->n);
 	(tmp->n) = (*s);
 	(*s) = tmp;
-}	
+}
 
 void	ps_push(t_list **a, t_list **b, char ab)
 {

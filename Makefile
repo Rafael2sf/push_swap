@@ -6,60 +6,91 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/25 10:50:21 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/25 12:18:30 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Project name
+################ PROGRAM ################
+
 NAME	=		push_swap
 
-# Terminal commands
-RM		=		rm -f
-PRNT	=		printf
-M		=		make
+################ TERMINAL ###############
 
-# Colors
-C_GRN	=		\033[32m
-C_DEF	=		\033[39m
-C_RED	=		\033[31m
+RMV		=		rm -f
+MKD		=		mkdir
+PRT		=		printf
+MKE		=		make
+CPY		=		cp
 
-# Directories
-SRC_D	=		src
-OBJ_D	=		obj
-LIB_D	=		libs
-BIN_D	=		bin
+################# COLORS ################
 
-# Commands
+--GRN	=		\033[32m
+--RED	=		\033[31m
+--WHT	=		\033[39m
+
+################# DIRS ##################
+
+_SRC	=		src
+_OBJ	=		obj
+_LIB	=		libs
+_BIN	=		bin
+
+############### COMPILER ################
+
 CC		=		gcc
 AR		=		ar rcs
-CFLAGS	=		-g -Wall -Werror -Wextra
+CF		=		-Wall -Werror -Wextra
 
-# Files
-SRCS	=		$(SRC_D)/main.c
-OBJS	=		$(patsubst $(SRC_D)/%.c,$(OBJ_D)/%.o,$(SRCS))
-LIBS	=		./src/libps/libps.a
+################ FILES ##################
 
-# Rules
-all: $(NAME)
+MAIN	=		$(_SRC)/main.c
+OBJS	=		$(_OBJ)/main.o
+DEPS	=		libft.a libps.a 
+LIBS	=		-lps -lft
 
-$(OBJ_D)/%.o: $(SRC_D)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+################ RULES ##################
 
-$(NAME): deps $(BIN_D)
-	$(CC) $(CFLAGS) ./src/main.c -o $(BIN_D)/$(NAME)
+all: deps $(NAME)
 
-deps:
-	$(M) libps.a -C ./src/libps
+$(_OBJ)/%.o: $(_SRC)/%.c
+	$(CC) $(CF) -c $< -o $@
 
-$(BIN_D):
-	mkdir $(BIN_D)
+$(NAME): deps $(_BIN) $(_BIN)/$(NAME)
+$(_BIN)/$(NAME): $(_OBJ) $(OBJS)
+	$(CC) $(CF) $(LIBS) $(OBJS) -o $@ -L $(_LIB)
+
+################ DEPS ###################
+
+deps: $(DEPS)
+
+libps.a:
+	$(MKE) libps.a -C src/libps
+
+libft.a:
+	$(MKE) libft.a -C src/libft
+
+############## STRUCTURE ################
+
+$(_OBJ):
+	$(MKD) $(_OBJ)
+
+$(_LIB):
+	$(MKD) $(_LIB)
+
+$(_SRC):
+	$(MKD) $(_SRC)
+
+$(_BIN):
+	$(MKD) $(_BIN)
+
+################### CLEAN ###############
 
 clean:
-	$(RM) $(OBJS) $(BIN_D)/$(NAME)
+	$(RMV) -r $(_OBJ)
 
 fclean: clean
-	$(RM) -r $(OBJ_D) $(LIB_D) $(BIN_D)
+	$(RMV) -r $(_BIN) $(_LIB)
 
 re: fclean all
 
-.PHONY: all deps clean fclean re
+.PHONY: all clean fclean re

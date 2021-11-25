@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 16:11:32 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/25 10:44:58 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/25 11:37:33 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,6 @@ CF		=		-Wall -Werror -Wextra
 
 SRCS	=		$(shell find . -maxdepth 1 -name "*.c")
 OBJS	=		$(patsubst $(_SRC)/%.c,$(_OBJ)/%.o,$(SRCS))
-DEPS	=		libft.a
 
 ################ RULES ##################
 
@@ -54,17 +53,9 @@ all: $(NAME)
 $(_OBJ)/%.o: $(_SRC)/%.c
 	$(CC) $(CF) -c $< -o $@
 
-$(NAME): deps $(_LIB) $(_LIB)/$(NAME)
+$(NAME): $(_LIB) $(_LIB)/$(NAME)
 $(_LIB)/$(NAME): $(_OBJ) $(OBJS)
-	$(CPY) $(_LIB)/libft.a $@
 	$(AR) $@ $(OBJS)
-
-################ DEPS ###################
-
-deps: $(DEPS)
-
-libft.a:
-	$(MKE) libft.a -C ../libft
 
 ############## STRUCTURE ################
 
@@ -85,10 +76,7 @@ $(_BIN):
 clean:
 	$(RMV) $(OBJS)
 
-dclean:
-	$(MKE) fclean -C ../libft	
-
-fclean: clean dclean
+fclean: clean
 	$(RMV) $(_LIB)/$(NAME)
 
 re: fclean all

@@ -6,12 +6,11 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:40:41 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/24 17:05:14 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/25 11:58:23 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
-#include <stdio.h>
 
 void	ps_step_2(t_list **a, t_list **b)
 {
@@ -43,6 +42,7 @@ void	ps_step_1(t_list **a, t_list **b, int avg)
 	if ((long)(*a)->v >= avg)
 		ps_get_next(a, avg);
 	ps_push(b, a, 'b');
+	
 	if (!*b || !(*b)->n)
 		return ;
 	if ((*b)->n->n && (long)(*b)->v < (long)(*b)->n->n->v)

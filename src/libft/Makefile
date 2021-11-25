@@ -6,9 +6,11 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 11:34:36 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/25 10:40:52 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/25 11:37:56 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+############# STATIC LIBRARY ############
 
 NAME	=		libft.a
 

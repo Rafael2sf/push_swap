@@ -95,4 +95,5 @@ else
 	exit 1
 fi
 
-printf "\nAverage: $(( $TOTAL / $COUNT ))\n"
+printf "\nAverage: "
+echo "scale=10; $TOTAL / $COUNT" | bc

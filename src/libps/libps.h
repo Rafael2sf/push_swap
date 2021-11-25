@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 20:21:13 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/25 10:50:03 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/25 11:48:31 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 
 # include "../libft/libft.h"
 
-# define PS_BLOCK 21
+# define PS_BLOCK 50
 
+void	push_swap(t_list **a, t_list **b, size_t len);
 /* Exits progam, freeing memory in case of error */
 void	ps_exit(t_list	**stack, int ret);
-/* Writes void as long number to stdout 
-void	ps_putvl(void *x);*/
 
 /* Convert a list of arguments to linked list of ints */
 t_list	*ps_lstatoi(char **list, int size);
@@ -28,8 +27,6 @@ t_list	*ps_lstatoi(char **list, int size);
 int		ps_atoi(const char *str, int *nbr);
 /* Search for nbr in linked list */
 int		ps_lstfind(t_list *s, int nbr);
-/* Find the bigger nbr in a list till depth bytes */
-int		ps_lstf_bigger(t_list *s, int nbr, size_t depth);
 /* Calculates the avg of a linked list till len bytes */
 int		ps_lstavg(t_list *a, size_t len);
 /* Find the smallest value in a */
@@ -66,7 +63,7 @@ void	ps_sort(t_list **a, t_list **b);
 
 /* Puts the next number to be pushed on top of stack */
 void	ps_get_next(t_list **a, int val);
-/* Similar to get next but reversed */
+/* Similar to get next but reversed and returns the position */
 ssize_t	ps_lstmaxp(t_list *a, ssize_t len);
 /* Calculates the block size based on PS_BLOCK */
 int		ps_calcd(size_t len);
