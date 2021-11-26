@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 16:11:32 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/25 12:35:56 by rafernan         ###   ########.fr        #
+#    Updated: 2021/11/26 10:43:45 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ SRCS	=		\
 				$(_SRC)/ps_sort_utils.c \
 				$(_SRC)/ps_utils.c \
 				$(_SRC)/push_swap.c
-				
+
 OBJS	=		$(patsubst $(_SRC)/%.c,$(_OBJ)/%.o,$(SRCS))
 
 ################ RULES ##################
