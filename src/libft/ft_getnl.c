@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_n_line.c                                    :+:      :+:    :+:   */
+/*   ft_getnl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 13:59:43 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/09 10:21:01 by rafernan         ###   ########.fr       */
+/*   Created: 2021/11/11 20:12:33 by rafernan          #+#    #+#             */
+/*   Updated: 2021/12/03 12:06:14 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*gnl_getline(char **rdbuff, char **buff, char *strg, size_t rdbl)
 static char	*gnl_read(int fd, char **rdbuff, char **buff, char *strg)
 {
 	char	*tmp;
-	size_t	bytes;
+	ssize_t	bytes;
 
 	tmp = *buff;
 	while (1)
@@ -76,7 +76,7 @@ static char	*gnl_strgl(char *strg, size_t slen)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char	*ft_getnl(int fd)
 {
 	static char	strg[FD_MAX][BUFFER_SIZE + 1];
 	char		*line;
@@ -89,7 +89,8 @@ char	*get_next_line(int fd)
 	buff = ft_strchr(strg[fd], '\n');
 	if (!buff)
 	{
-		buff = ft_strdup(strg[fd]);
+		if (strg[fd][0])
+			buff = ft_strdup(strg[fd]);
 		strg[fd][0] = '\0';
 		rdbuf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 		if (!rdbuf)

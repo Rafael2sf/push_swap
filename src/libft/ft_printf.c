@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:21:09 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/06 13:54:52 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/11/01 23:14:19 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ static int	ft_printfm(char *format, va_list args)
 				return (bytes);
 		}
 		else
-			bytes += write(1, format, 1);
+		{
+			write(1, format, 1);
+			bytes++;
+		}
 		format++;
 	}
 	return (bytes);
