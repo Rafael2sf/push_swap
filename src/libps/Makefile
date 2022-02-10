@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/11/06 16:11:32 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/26 10:43:45 by rafernan         ###   ########.fr        #
+#    Created: 2021/10/21 11:34:36 by rafernan          #+#    #+#              #
+#    Updated: 2021/12/03 12:25:12 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME	=		libps.a
 
-################ TERMINAL ###############
+################### TERMINAL ############
 
 RMV		=		rm -f
 MKD		=		mkdir
@@ -22,66 +22,65 @@ PRT		=		printf
 MKE		=		make
 CPY		=		cp
 
-################# COLORS ################
+################### COLORS ##############
 
 --GRN	=		\033[32m
 --RED	=		\033[31m
 --WHT	=		\033[39m
 
-################# DIRS ##################
+################### DIRS ################
 
-_SRC	=		.
-_OBJ	=		../../obj
-_LIB	=		../../libs
-_BIN	=		../../bin
+_SRC	=
+_OBJ	=		../../obj/
+_LIB	=		../../libs/
+_BIN	=		../../bin/
 
-############### COMPILER ################
+################### COMPILER ############
 
 CC		=		gcc
 AR		=		ar rcs
 CF		=		-Wall -Werror -Wextra
 
-################ FILES ##################
+################### FILES ###############
 
-SRCS	=		\
-				$(_SRC)/ps_atoi.c \
-				$(_SRC)/ps_get_next.c \
-				$(_SRC)/ps_issorted.c \
-				$(_SRC)/ps_lst_utils.c \
-				$(_SRC)/ps_opers.c \
-				$(_SRC)/ps_opers2.c \
-				$(_SRC)/ps_osort.c \
-				$(_SRC)/ps_sort.c \
-				$(_SRC)/ps_sort_utils.c \
-				$(_SRC)/ps_utils.c \
-				$(_SRC)/push_swap.c
+SRCS_	=		\
+				atoi_l.c \
+				doubles.c \
+				lstutils.c \
+				push.c \
+				rotate.c \
+				swap.c \
+				osort.c \
+				sort.c \
+				to_stack.c \
+				to_top.c \
+				utils.c \
+				get_group.c
 
-OBJS	=		$(patsubst $(_SRC)/%.c,$(_OBJ)/%.o,$(SRCS))
+SRCS	=		$(addprefix $(_SRC), $(SRCS_))
+OBJS	=		$(patsubst $(_SRC)%.c,$(_OBJ)%.o,$(SRCS))
 
-################ RULES ##################
+################### RULES ###############
 
 all: $(NAME)
 
-$(_OBJ)/%.o: $(_SRC)/%.c
+$(_OBJ)%.o: $(_SRC)%.c
 	$(CC) $(CF) -c $< -o $@
 
-$(NAME): $(_LIB) $(_LIB)/$(NAME)
-$(_LIB)/$(NAME): $(_OBJ) $(OBJS)
+$(NAME): $(_LIB) $(_LIB)$(NAME)
+$(_LIB)$(NAME): $(_OBJ) $(OBJS)
 	$(AR) $@ $(OBJS)
 
-############## STRUCTURE ################
+################### STRUCTURE ###########
 
 $(_OBJ):
-	$(MKD) $(_OBJ)
+	$(MKD) $@
 
 $(_LIB):
-	$(MKD) $(_LIB)
+	$(MKD) $@
 
 $(_SRC):
-	$(MKD) $(_SRC)
-
-$(_BIN):
-	$(MKD) $(_BIN)
+	$(MKD) $@
 
 ################### CLEAN ###############
 
@@ -89,7 +88,7 @@ clean:
 	$(RMV) $(OBJS)
 
 fclean: clean
-	$(RMV) $(_LIB)/$(NAME)
+	$(RMV) $(_LIB)$(NAME)
 
 re: fclean all
 

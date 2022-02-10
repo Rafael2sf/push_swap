@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/11/06 12:50:23 by rafernan          #+#    #+#              #
-#    Updated: 2021/11/25 12:54:02 by rafernan         ###   ########.fr        #
+#    Created: 2022/01/20 21:55:53 by rafernan          #+#    #+#              #
+#    Updated: 2022/01/20 21:55:53 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ CPY		=		cp
 _SRC	=		src
 _OBJ	=		obj
 _LIB	=		libs
-_BIN	=		bin
 
 ############### COMPILER ################
 
@@ -55,9 +54,8 @@ all: deps $(NAME)
 $(_OBJ)/%.o: $(_SRC)/%.c
 	$(CC) $(CF) -c $< -o $@
 
-$(NAME): deps $(_BIN) $(_BIN)/$(NAME)
-$(_BIN)/$(NAME): $(_OBJ) $(OBJS)
-	$(CC) $(CF) $(LIBS) $(OBJS) -o $@ -L $(_LIB)
+$(NAME): deps $(_OBJ) $(OBJS)
+	$(CC) $(CF) $(_OBJ)/*.o -o $(NAME)
 
 ################ DEPS ###################
 
@@ -80,16 +78,13 @@ $(_LIB):
 $(_SRC):
 	$(MKD) $(_SRC)
 
-$(_BIN):
-	$(MKD) $(_BIN)
-
 ################### CLEAN ###############
 
 clean:
-	$(RMV) -r $(_OBJ)
+	$(RMV) -r $(_OBJ) $(_LIB)
 
 fclean: clean
-	$(RMV) -r $(_BIN) $(_LIB)
+	$(RMV) -r $(NAME)
 
 re: fclean all
 

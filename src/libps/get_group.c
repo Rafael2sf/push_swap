@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_issorted.c                                      :+:      :+:    :+:   */
+/*   get_group.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 21:50:15 by rafernan          #+#    #+#             */
-/*   Updated: 2021/11/25 11:58:34 by rafernan         ###   ########.fr       */
+/*   Created: 2022/02/04 11:55:33 by rafernan          #+#    #+#             */
+/*   Updated: 2022/02/09 10:58:26 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libps.h"
 
-int	ps_issorted(t_list	*a)
-{
-	t_list	*tmp;
-	int		count;
+static int	ps_calcd(size_t len);
 
-	if (!a)
-		return (-1);
-	tmp = a;
-	count = 1;
-	while (tmp->n)
+int	ps_getgroup(t_stack *a, int len)
+{
+	int	min;
+	
+	min = ps_lstmin(a);
+	return (((ps_lstavg(a, len) - min) / ps_calcd(len)) + min);
+}
+
+static int	ps_calcd(size_t len)
+{
+	size_t	cur;
+	int		ret;
+
+	cur = PS_GROUP;
+	ret = 1;
+	while (cur < len)
 	{
-		if ((long)(tmp->v) > (long)(tmp->n->v))
-			return (count);
-		count++;
-		tmp = (tmp->n);
+		cur *= 2;
+		ret++;
 	}
-	return (0);
+	return (ret);
 }

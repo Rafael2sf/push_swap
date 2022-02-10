@@ -14,60 +14,42 @@
 # define LIBPS_H
 
 # include "../libft/libft.h"
+# include <ctype.h>
 
-# define PS_BLOCK 50
+typedef t_list	t_stack;
 
-void	push_swap(t_list **a, t_list **b, size_t len);
-/* Exits progam, freeing memory in case of error */
-void	ps_exit(t_list	**stack, int ret);
+#define PS_GROUP 50
 
-/* Convert a list of arguments to linked list of ints */
-t_list	*ps_lstatoi(char **list, int size);
-/* Converts str to nbr, if number overflows or underflows int returns 0 */
-int		ps_atoi(const char *str, int *nbr);
-/* Search for nbr in linked list */
-int		ps_lstfind(t_list *s, int nbr);
-/* Calculates the avg of a linked list till len bytes */
-int		ps_lstavg(t_list *a, size_t len);
-/* Find the smallest value in a */
+int		ps_atoi_l(const char *str, int *nbr);
+t_stack	*ps_to_stack(char **argv, unsigned int size);
+
+int		ps_lstfind(t_stack *stack, int nbr);
+int		ps_issorted(t_stack *a);
+int		ps_lstavg(t_stack *s, size_t len);
+int		ps_lstmaxp(t_stack *a, int len);
 int		ps_lstmin(t_list *a);
+int		ps_getgroup(t_stack *a, int len);
 
-/* Swap 2 at the top */
-void	ps_swap(t_list **s, char ab);
-/* Push top to other stack */
-void	ps_push(t_list **a, t_list **b, char ab);
-/* Rotates the stack, first becomes last */
-void	ps_rot(t_list **s, char ab);
-/* Rotates the stack, last becomes first */
-void	ps_rrot(t_list **s, char ab);
-/* Swap 2 stacks in one move */
-void	ps_ss(t_list **a, t_list **b);
-/* Rotate 2 stacks in on move */
-void	ps_rr(t_list **a, t_list **b);
-/* Reverse rotate 2 stacks in one move */
-void	ps_rrr(t_list **a, t_list **b);
+int		ps_at(t_stack *s, int loc);
+void	ps_do(t_stack **a, t_stack **b, void (*f)(t_stack**, t_stack**, int));
+void	ps_to_top(t_stack **a, char sign, int val);
 
-/* Temporary app function to test sorting moves */
-//void	app(t_list **a, t_list **b);
-/* Temporary function to print stacks onto the screen */
-//void	ps_prints(t_list *a, t_list *b);
+void	sa(t_stack **a, t_stack **b, int print);
+void	sb(t_stack **a, t_stack **b, int print);
+void	pa(t_stack **a, t_stack **b, int print);
+void	pb(t_stack **a, t_stack **b, int print);
+void	ra(t_stack **a, t_stack **b, int print);
+void	rb(t_stack **a, t_stack **b, int print);
+void	rra(t_stack **a, t_stack **b, int print);
+void	rrb(t_stack **a, t_stack **b, int print);
+void	ss(t_stack **a, t_stack **b, int print);
+void	rr(t_stack **a, t_stack **b, int print);
+void	rrr(t_stack **a, t_stack **b, int print);
 
-/* Check if stack is organized from smallest to bigger */
-int		ps_issorted(t_list *a);
-/* Optimized sort for list of size 3 */
-void	ps_osort3(t_list **a, t_list **b);
-/* Optimized sort for list of size 5 */
-void	ps_osort5(t_list **a, t_list **b, size_t a_siz, int avg);
-/* Sorts the list */
-void	ps_sort(t_list **a, t_list **b);
+void	ps_osort3(t_stack **s);
+void	ps_osort5(t_stack **a, t_stack **b, int len);
+void	ps_sort100(t_stack **a, t_stack **b, int len);
 
-/* Puts the next number to be pushed on top of stack */
-void	ps_get_next(t_list **a, int val);
-/* Similar to get next but reversed and returns the position */
-ssize_t	ps_lstmaxp(t_list *a, ssize_t len);
-/* Calculates the block size based on PS_BLOCK */
-int		ps_calcd(size_t len);
-/*	Returns the maximum value of the next number to push */
-int		ps_nmax(int avg, int min, int div);
+void	show(t_list *a, t_stack *b);
 
 #endif
